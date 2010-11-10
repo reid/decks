@@ -1,0 +1,267 @@
+Title: Hack with YUI
+Author: Reid Burke<br>@reid
+Footer: HACKU 2010 &mdash; Carnegie Mellon University
+
+%css
+.inline li {
+    float: left;
+    list-style: none;
+    padding: 10px;
+    margin: 7px;
+    background: #232323;
+    font-weight: bold;
+    font-size: 180%;
+}
+
+.inline li:last-child {
+    background: #343434;
+}
+
+.inline a {
+    text-align: center;
+}
+
+.bigtext {
+    font-size: 260%;
+}
+%end
+
+!SLIDE bigtext
+
+YUI exists to build web applications faster.
+
+What is YUI?
+============
+
+The YUI Library is a set of utilities and controls, written with JavaScript and CSS, for building richly interactive web applications.
+
+Open source under the liberal BSD license.
+
+Driven by the YUI Team at Yahoo! and contributors around the world.
+
+<http://yuilibrary.com/>
+
+!SLIDE inline
+
+<http://yuiblog.com/blog/category/in-the-wild/>
+
+- Mint
+- Target
+- LinkedIn
+- Microsoft
+- Google
+- Reuters
+- Walgreens
+- NFL
+- Ford
+- Harley-Davidson
+- Flickr
+- National Geographic
+- Gatorade
+- Duck Duck Go
+- This Slideshow
+
+Why hack with YUI?
+==================
+
+% YUI is stable enough
+- You don't have time to fix bugs in your JavaScript
+- Avoid reinventing the wheel
+    - Core: Rock-solid DOM manipulation, events, and more
+    - Transition: Rich effects using CSS3
+    - Drag and Drop
+    - Gesture Events: Swipe, flick, and more for touch devices
+    - ScrollView: scroll on mobile devices
+
+SimpleYUI
+=========
+
+    <script
+        src="http://yui.yahooapis.com/3.2.0
+        /build/simpleyui/simpleyui-min.js">
+    </script>
+
+    <script>
+    Y.one("#foo").addClass("highlight");
+    </script>
+
+Working with DOM: Events
+================
+
+    // get an element reference, add a click handler
+    Y.one('#demo').on('click', 
+        function(e) {/*handle click*/});
+
+Working with DOM: Append
+================
+
+    // add content to an element
+    Y.one('#demo').append('Added to #demo.');
+
+Working with DOM: Event Delegation
+================
+
+    // listen for any click on any <li>
+    // that descends from #demo:
+    Y.one('#demo').delegate('click',
+        function(e) {/*handle click*/}, 'li');
+
+Working with DOM: Move Elements
+================
+
+    // move #demo to the location of any click
+    Y.one('document').on('click', function(e) {
+            Y.one('#demo').setXY([e.pageX, e.pageY]);
+        }
+    );
+
+Fancy Transitions
+=================
+
+    Y.one('#demo').transition({
+        easing: 'ease-out',
+        duration: 2, // seconds
+        opacity: 0
+    }, function() {
+        this.remove();
+    });
+
+Ajax
+====
+
+    Y.io('get.php', {
+        on: {
+            complete: function (id, response) {
+                var data = response.responseText;
+                // handle the response
+            }
+        }
+    });
+
+Extend with Y.use
+=================
+
+    Y.use('dd-drag', function(Y) {
+        var dd = new Y.DD.Drag({
+            node: '#foo'
+        });
+    });
+
+YQL
+====
+
+    Y.use('yql', function (Y) {
+        var res = Y.one('#res'), zip = '90210';
+     
+        Y.YQL('select * from weather.forecast'
+            + ' where location=' + zip, function (r) {
+
+            var item = r.query.results.channel.item;
+
+            var el = Y.Node.create('div'); 
+            el.setContent('<h2>Weather for '
+                + zip + '</h2>'
+                + item.description);
+     
+            res.appendChild(el); 
+        });
+    });
+
+YUI Gallery
+===========
+
+The YUI of tomorrow, today.
+---------------------------
+
+ - Community collection of YUI 3 modules
+ - BSD license
+ - Hosted on Yahoo!'s CDN
+
+<http://yuilibrary.com/gallery/>
+
+AlloyUI Widgets
+---------------
+
+Ratings, paginator, resize, Loading Mask, "lozenges", inline editing, drag and drop sorting...
+
+<http://alloy.liferay.com/demos.php>
+
+YUI 2
+=====
+
+You can easily use YUI 2.x widgets inside of YUI 3.
+
+    Y.use('yui2-datatable', function (Y) {
+        var YAHOO = Y.YUI2;
+        new YAHOO.widget.DataTable("basic");
+    });
+
+- AutoComplete
+- ImageCropper
+- Color Picker
+- SimpleDialog
+- ProgressBar 
+
+jQuery to YUI Rosetta Stone
+======
+
+Great resource for jQuery users.
+
+- Provides one-to-one reference from jQuery to YUI 3.
+- Maintained by Paul Irish and the YUI Team.
+
+<http://jsrosettastone.com/>
+
+YUI on Node.js
+====
+
+You can use Node.js, jsdom, and YUI to manipulate pages on the server!
+
+- Progressive enhancement
+- Write once, works on the client and the server
+- Our wrapper creates a simulated DOM for you
+
+<http://yuilibrary.com/projects/nodejs-yui3>
+
+Easy installation
+-----------------
+
+    $ npm install yui3
+
+See <http://npmjs.org>.
+
+Using YUI inside of Express
+====
+
+<http://express.davglass.com/>
+
+    app.get('/three', function(req, res){
+        res.render('same.html', {
+            locals: {
+                content: '#content',
+                before: function(Y) {
+                    Y.one('h1').set('innerHTML', 'Welcome to Page #3');
+                },
+                after: function(Y, options, partial) {
+                    Y.one('title').set('innerHTML', 'Page #3');
+                    Y.all('#nav li').removeClass('selected');
+                    Y.one('#nav li.three').addClass('selected');
+                }
+        })
+    });
+
+!SLIDE
+
+Thanks.
+-------
+
+ - [@reid](http://twitter.com/reid) on Twitter
+ - <rburke@yahoo-inc.com>
+
+Hack This Deck
+--------------
+
+<http://reid.github.com/deck-cmu/>
+
+- Source code: <http://github.com/reid/deck-cmu>
+- Slideshow system built on YUI 3: <http://github.com/reid/s7>

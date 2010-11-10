@@ -1,0 +1,998 @@
+<!doctype html>
+
+<title>Yeti: YUI&#146;s Easy Testing Interface</title>
+
+<meta charset="utf-8">
+<meta name="author" content="Reid Burke">
+<meta name="copyright" content="2010 Yahoo! Inc. Licensed under the YUI BSD license.">
+
+<link rel="stylesheet" href="build/upstage-keynote-min.css" media="screen">
+
+<style>
+  
+/* YUICONF 2010 */
+
+.yui3-js-enabled .title h1 {
+    border-color: #b23700 !important;
+}
+
+.yui3-js-enabled .title a {
+    color: #b23700;
+}
+
+.yui3-js-enabled .title {
+    font-size: 1.7em;
+    padding-left: 40%;
+    width: 56%;
+    margin: auto;
+    height: 94%;
+    background: #420603 url("title.png") no-repeat bottom left;
+    color: #ffad6c;
+    border-bottom: 4px solid #ffad6c;
+}
+
+/* UPSTAGE SYSTEM */
+
+#ft .credit:before {
+    content: "POWERED ";
+    letter-spacing: -1px;
+    font-weight: bold;
+    padding-right: 10px;
+    color: #fff;
+}
+
+#ft .credit {
+    color: #dcdcdc;
+}
+
+/* inline list */
+
+.inline li {
+    float: left;
+    list-style: none;
+    padding: 10px;
+    margin: 7px;
+    background: #232323;
+    font-weight: bold;
+    font-size: 180%;
+}
+
+.inline li:last-child {
+    background: #343434;
+}
+
+.inline a {
+    text-align: center;
+}
+
+/* big text */
+
+.bigtext {
+    font-size: 260%;
+}
+
+.bigtext p {
+    padding-bottom: 30px;
+}
+
+/* upstage overrides */
+
+#ft {
+    text-transform: none;
+}
+
+#ft b {
+    font-weight: bold;
+}
+
+/* yeti */
+
+.title h1 {
+    border: 0;
+}
+
+.title p {
+    margin: 0;
+    text-align: left;
+}
+
+.title p:before {
+    content: "by ";
+}
+
+.title p:after {
+    float: right;
+    content: "@reid";
+    padding-left: 20px;
+    color: #b23700;
+}
+
+.pic {
+    background: #000 no-repeat scroll 50% 0;
+    height: 1000px;
+}
+
+.pic p {
+    background: #000;
+    padding: 12px;
+    margin: -10px;
+}
+
+/*
+.greyed {
+    opacity: 0.7;
+}
+
+.greyed p {
+    opacity: 1 !important;
+}
+*/
+
+.selenium {
+    background-position: center -300px;
+}
+
+.selenium p {
+    position: relative;
+    top: 30px;
+}
+
+.gbs p {
+    position: relative;
+    top: 123px;
+    left: 400px;
+    width: 60%;
+}
+
+.chalk p {
+    position: relative;
+    top: 420px;
+}
+
+.webnotes {
+    background-position: 50% -100px;
+}
+
+.jsnotes {
+    background-position: 50% -100px;
+}
+
+.ppk blockquote {
+    position: relative;
+    top: 200px;
+    transform: rotate(-4deg);
+    -webkit-transform: rotate(-4deg);
+    -moz-transform: rotate(-4deg);
+    -o-transform: rotate(-4deg);
+}
+
+.ppk a {
+    position: absolute;
+    font-size: 23pt;
+    bottom: 210px;
+    background: #000;
+    opacity: 0.8;
+}
+
+#viddlerOuter-81686442 {
+    border: 10px solid #fff;
+}
+
+#console .yui3-console-bd {
+    font-size: 24px;
+}
+
+/* generic upstage additions */
+
+.center {
+    text-align: center;
+}
+
+
+</style>
+
+<body>
+
+<div id="bd">
+
+<div class="presentation">
+
+    <div class="slide title">
+        <h1>Yeti: YUI&#146;s Easy Testing Interface</h1>
+        <p>Reid Burke</p>
+    </div>
+   
+<div class='slide '>
+
+<!-- _S9SLIDE_  -->
+
+<p>Hello, world!</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+<!-- Tested slide! -->
+
+<p>Hello, world!</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>You&rsquo;re either missing out on bugs or struggling with complicated tools.</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="frontend-test-runners">Frontend Test Runners</h1><p>The incumbents:</p>
+
+<ul>
+  <li>Selenium</li>
+  <li>TestSwarm</li>
+  <li>JSTestDriver</li>
+</ul>
+
+
+</div>
+<div class='slide '>
+<h1 id="focus-after-the-commit">Focus: After The Commit</h1><ul>
+  <li>Selenium</li>
+  <li>TestSwarm</li>
+</ul>
+
+<p>Intended to be used with infrastructure dedicated to testing.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Yeti is hyper-focused on before the commit.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Yeti is personal.</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="frontend-test-runners-1">Frontend Test Runners</h1><ul>
+  <li>
+    <s>Selenium</s>
+  </li>
+  <li>
+    <s>TestSwarm</s>
+  </li>
+  <li>JSTestDriver</li>
+</ul>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>JSTestDriver works well before the commit.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>But JSTestDriver didn&rsquo;t fit our needs.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>JSTestDriver requires JavaScript test files.</p>
+
+<p>HTML is supported with their HtmlDoc feature.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>We wanted to run our existing tests.</p>
+
+<p>We wanted to run HTML documents with YUI Test tests.</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="works-with-html">Works with HTML?</h1><ul>
+  <li>Selenium</li>
+  <li>TestSwarm</li>
+  <li>
+    <s>JSTestDriver</s>
+  </li>
+</ul>
+
+<p>It&rsquo;s a TODO item for JSTestDriver.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>JSTestDriver requires tests to be executed with their test framework.</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="why-not-jstestdriver">Why not JSTestDriver?</h1><p>No support for HTML documents. HtmlDoc is awkward.</p>
+
+<p>We like YUI Test.</p>
+
+<p>We wanted to use our existing tests.</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="frontend-test-runners-2">Frontend Test Runners</h1><ul>
+  <li>
+    <s>Selenium</s>
+  </li>
+  <li>
+    <s>TestSwarm</s>
+  </li>
+  <li>
+    <s>JSTestDriver</s>
+  </li>
+</ul>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Why Yeti?</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Yeti works with unmodified YUI Test-based tests.</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="which-kinds-of-tests">Which kinds of tests?</h1><ul>
+  <li>Unit tests?</li>
+  <li>Functional tests?</li>
+</ul>
+
+<p>Whatever you want: It&rsquo;s up to you.</p>
+
+<p>That&rsquo;s implementation details, not up to the test runner.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Yeti is fast.</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="need-for-speed">Need for Speed</h1><ul>
+  <li>Feedback as quick as possible.</li>
+  <li>Advances to the next test immediately.</li>
+  <li>Runs tests in parallel with multiple browsers at once.</li>
+</ul>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>You&rsquo;re testing closer to the change.</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+<p>You run Yeti from the command line.</p>
+
+<div style="font-family:monospace; white-space:pre">
+$ yeti src/async-queue/tests/async-queue.html [etc]
+Waiting for results. When you're done, hit Ctrl-C to exit.
+
+<span style="color:#b6fb76;">✔</span>  <span style="font-weight:bold;">Y.AsyncQueue</span> on Safari (5.0.2) / Mac OS
+<span style="color:#b6fb76;font-weight:bold;">   18 passed</span>,  0 failed
+
+<span style="color:red;">✖</span>  <span style="font-weight:bold;">Cache Test Suite</span> on Safari (5.0.2) / Mac OS
+<span style="color:#b6fb76;font-weight:bold;">   24 passed</span>, <span style="color:red;font-weight:bold;"> 4 failed</span>
+   in <span style="font-weight:bold;">Event Tests</span>
+     <span style="color:red;font-weight:bold;">testAdd</span>: Unexpected error: resume() called without wait().
+     <span style="color:red;font-weight:bold;">testFlush</span>: Unexpected error: resume() called without wait().
+     <span style="color:red;font-weight:bold;">testRequest</span>: Unexpected error: resume() called without wait().
+     <span style="color:red;font-weight:bold;">testRetrieveSuccess</span>: Unexpected error: resume() called without wait().
+
+<span style="color:#b6fb76;">✔</span>  <span style="font-weight:bold;">Attribute Unit Tests</span> on Safari (5.0.2) / Mac OS
+<span style="color:#b6fb76;font-weight:bold;">   106 passed</span>,  0 failed
+
+<span style="color:#b6fb76;">✔</span>  <span style="font-weight:bold;">Y.AsyncQueue</span> on Internet Explorer (9.0) / Windows
+<span style="color:#b6fb76;font-weight:bold;">   18 passed</span>,  0 failed
+
+<span style="color:#b6fb76;">✔</span>  <span style="font-weight:bold;">Attribute Unit Tests</span> on Internet Explorer (9.0) / Windows
+<span style="color:#b6fb76;font-weight:bold;">   106 passed</span>,  0 failed
+
+<span style="color:#b6fb76;">✔</span>  <span style="font-weight:bold;">Y.AutoComplete</span> on Safari (5.0.2) / Mac OS
+<span style="color:#b6fb76;font-weight:bold;">   50 passed</span>,  0 failed
+</div>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Yeti is fault tolerant.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Yeti recovers from syntax errors and 404s.</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+<p>Yeti reports uncaught exceptions.</p>
+
+<div style="font-family:monospace; white-space:pre">
+$ yeti test.html
+Waiting for results. When you're done, hit Ctrl-C to exit.
+
+<span style="color:red;">✖</span>  <span style="font-weight:bold;">test.html</span> on Internet Explorer (9.0) / Windows
+<span style="color:#b6fb76;font-weight:bold;">   0 passed</span>, <span style="color:red;font-weight:bold;"> 1 failed</span>
+   in <span style="font-weight:bold;">window.onerror handler (yeti virtual test)</span>
+     <span style="color:red;font-weight:bold;">window.onerror should not fire</span>: Syntax error
+</div>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+<p>Yeti reports tests not in Standards Mode.</p>
+
+<div style="font-family:monospace; white-space:pre">
+$ yeti test.html
+Waiting for results. When you're done, hit Ctrl-C to exit.
+
+<span style="color:red;">✖</span>  <span style="font-weight:bold;">test.html</span> on Internet Explorer (9.0) / Windows
+<span style="color:#b6fb76;font-weight:bold;">   0 passed</span>, <span style="color:red;font-weight:bold;"> 1 failed</span>
+   in <span style="font-weight:bold;">window.onerror handler (yeti virtual test)</span>
+     <span style="color:red;font-weight:bold;">window.onerror should not fire</span>: Not in Standards Mode! 
+</div>
+
+
+</div>
+<div class='slide '>
+<h1 id="fault-tolerance">Fault Tolerance</h1><ul>
+  <li>Syntax errors</li>
+  <li>Nonexistent tests</li>
+  <li>Uncaught exceptions</li>
+  <li>Files without tests</li>
+  <li>Not in Standards Mode</li>
+</ul>
+
+<p>Yeti keeps you away from a web browser.</p>
+
+<p>Yeti keeps you closer to your editor.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Yeti keeps you writing code.</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+<p>When testing is simple, you spend more time on more important things.</p>
+
+<ul>
+  <li>Writing more tests</li>
+  <li>Writing more code</li>
+</ul>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+<p>You spend less time on boring things.</p>
+
+<ul>
+  <li>Avoiding tests: what&rsquo;s the point?</li>
+  <li>Launching tests yourself</li>
+</ul>
+
+
+</div>
+<div class='slide '>
+<h1 id="food-for-thought">Food for Thought</h1><p>Graded Browser Support is a QA philosophy. It exists because you can only test so much.</p>
+
+<p>It trades off testing everything for testing a majority.</p>
+
+<p>What if you could test everything?</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Your app will be more awesome if testing is easy.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Your app will be more awesome if you use Yeti.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Yeti is designed for the mobile future.</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="yeti-recap">Yeti: Recap</h1><ul>
+  <li>Test as close to the change as possible</li>
+  <li>Your tests are grown-up HTML documents</li>
+  <li>Works with unmodified YUI Test-based tests</li>
+  <li>Fast test execution</li>
+  <li>Fault tolerant</li>
+  <li>Designed for mobile</li>
+</ul>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>The case for Yeti.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Testing the hard way adds up.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>What tests can be made easy?</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>What tests can be automated?</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="automate">Automate?</h1><p>Maybe.</p>
+
+<p>User interface &rarr; best tested by a human.</p>
+
+<p>Most everything else can be automated.</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="automation">Automation</h1><p>YUI Test is a great web app testing framework.</p>
+
+<ul>
+  <li>Mocks</li>
+  <li>Async Tests</li>
+  <li><code>foo should do X</code></li>
+  <li>Works with any other framework</li>
+</ul>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+<p>If a test can be automated, you should be using a testing framework.</p>
+
+<p>If you&rsquo;re using a test framework, you should automate test launching too.</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="automation-vs-launching">Automation vs. Launching</h1><p>Yeti is a test launcher.</p>
+
+<p>It launches tests.</p>
+
+<p>For automated tests, it automatically reports results to you.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Reloading just to view YUI Test results is a drag.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>And, it doesn&rsquo;t scale.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>You need test automation.</p>
+
+<p>You need a way to launch tests.</p>
+
+</div>
+<div class='slide inline'>
+<!-- _S9SLIDE_  inline -->
+
+<p>How does Yeti fit in?</p>
+
+<ul>
+  <li>Selenium</li>
+  <li>JSTestDriver</li>
+  <li>TestSwarm</li>
+  <li>Yeti</li>
+</ul>
+
+</div>
+<div class='slide selenium pic bigtext'>
+<!-- _S9SLIDE_  selenium pic bigtext -->
+
+<p>Using Selenium is complicated.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Selenium has its place in CI.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Selenium doesn&rsquo;t work for mobile devices.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>TestSwarm requires dedicated LAMP infrastructure.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>JSTestDriver excels at performance at the expense of too many features.</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+<ul>
+  <li>Test closer to the change.</li>
+  <li>Test without infrastructure.</li>
+  <li>Test quickly.</li>
+  <li>Test what you already have.</li>
+</ul>
+
+<p>Yeti is a great fit.</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+<p>Let me show you.</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+<p>Try running tests in your web browser or mobile device.</p>
+
+<p><a class="bigtext">http://reid.hacked.jp/</a></p>
+
+
+</div>
+<div class='slide '>
+<h1 id="a-listing-of-javascript-web-app-testing-tools-written-in-javascript">A Listing of JavaScript Web App Testing Tools Written In JavaScript</h1><ul>
+  <li>Yeti</li>
+</ul>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Yeti is written in JavaScript.</p>
+
+<p>Yeti runs on Node.js.</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="yeti-testing">Yeti Testing</h1><p>Yeti itself benefits from asynchronous behavior driven tests.</p>
+
+<p>Uses the <a href="http://vowsjs.org/">Vows</a> framework. <a href="http://vowsjs.org/">http://vowsjs.org/</a></p>
+
+<p>Practice what you preach.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>One more thing.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Yeti is excellent at automated tests.</p>
+
+<p>What about manual tests?</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="automation-1">Automation?</h1><p>Some tests are difficult to automate.</p>
+
+<p>You&rsquo;re still opening tests in dozens of browsers.</p>
+
+<p>The test is your web site.</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+<p>But you should be able to launch them automatically.</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="stickshift">Stickshift</h1><p>Experimental branch on my fork at <a href="http://github.com/reid/yeti">http://github.com/reid/yeti</a>.</p>
+
+<p>Designed to launch manual tests. Compliments automated tests.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Stickshift builds on the fact web tests are web sites.</p>
+
+<p>Supporting HTML is key to that ability.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Yeti makes you a better engineer today.</p>
+
+<p>Nevertheless, we&rsquo;re not done. Expect more.</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="yeti-012">Yeti 0.1.2</h1><p>Released today. Better fault tolerance and bugfixes.</p>
+
+
+</div>
+<div class='slide '>
+<h1 id="getting-yeti">Getting Yeti</h1><ul>
+  <li>Install Node.js from <a href="http://nodejs.org/">http://nodejs.org/</a> </li>
+  <li>Install NPM from <a href="http://npmjs.org/">http://npmjs.org/</a></li>
+  <li><code>npm install yeti</code></li>
+</ul>
+
+
+</div>
+<div class='slide '>
+<h1 id="exploring-yeti">Exploring Yeti</h1><ul>
+  <li>Code: <a href="http://github.com/yui/yeti">http://github.com/yui/yeti</a></li>
+  <li>Bugs, forums: <a href="http://yuilibrary.com/projects/yeti">http://yuilibrary.com/projects/yeti</a></li>
+</ul>
+
+<p>We want you to make Yeti even better.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p><s>You're either missing out on bugs or struggling with complicated tools.</s></p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>You&rsquo;re either missing out on bugs or haven&rsquo;t used Yeti.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Q&amp;A</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+<h2 id="thanks">Thanks.</h2>
+
+<ul>
+  <li><a href="http://twitter.com/reid">@reid</a> on Twitter</li>
+  <li><a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#114;&#098;&#117;&#114;&#107;&#101;&#064;&#121;&#097;&#104;&#111;&#111;&#045;&#105;&#110;&#099;&#046;&#099;&#111;&#109;">&#114;&#098;&#117;&#114;&#107;&#101;&#064;&#121;&#097;&#104;&#111;&#111;&#045;&#105;&#110;&#099;&#046;&#099;&#111;&#109;</a></li>
+</ul>
+
+<h2 id="steal-this-deck">Steal this deck.</h2>
+
+<p><a href="http://reid.github.com/decks/2010/yuiconf/yeti.html">http://reid.github.com/decks/2010/yuiconf/yeti.html</a></p>
+
+<ul>
+  <li>Source code: <a href="http://github.com/reid/decks">http://github.com/reid/decks</a></li>
+  <li>Slideshow system built on YUI 3: <a href="http://github.com/reid/upstage">http://github.com/reid/upstage</a></li>
+</ul>
+</div>
+
+
+</div>
+
+</div>
+
+<div id="ft">
+    <p class="credit">
+        Yeti by <b>@reid</b> &mdash; YUIConf 2010
+    </p>
+</div>
+
+<script src="http://yui.yahooapis.com/3.3.0pr1/build/yui/yui-min.js"></script>
+<script src="build/upstage-min.js"></script>
+<script src="build/lang/upstage-l10n.js"></script>
+<script>
+YUI().use("upstage", function (Y) {
+
+
+    var Upstage = Y.Upstage;
+
+    // Load images after interactivity.
+    // Improves onload performance.
+    // Also important for embedded test automation,
+    // which doesn't care about fancy huge images.
+
+    Upstage.once(
+        Upstage.currentSlide > 1
+        ? "start" // register immediately if not on slide 1
+        : "navigate", // otherwise, wait for interactivity
+        function registerImages () {
+
+        Y.use("stylesheet", function (Y) {
+
+            var sheet = new Y.StyleSheet;
+
+            sheet.disable();
+
+            function image (klass) {
+                sheet.set("." + klass, {
+                    backgroundImage : "url(" + klass + ".png)"
+                });
+            }
+
+            image("selenium");
+            image("gbs");
+            image("chalk");
+            image("ppk");
+            image("webnotes");
+            image("jsnotes");
+
+            sheet.enable();
+
+        });
+
+    });
+
+    // Demo slide!
+
+    var DEMO_SLIDE = 3;
+
+    var setup, teardown;
+
+    Upstage.on("navigate", function (next) {
+        // These functions may not be defined yet.
+        // Check first.
+        if (DEMO_SLIDE == next) {
+            if (setup) setup();
+        } else {
+            if (teardown) teardown();
+        }
+    });
+
+    var waiting;
+
+    var hi = Y.one("#hello"),
+        results = Y.Node.create("<div id='console'></div>");
+
+    results.addClass("yui3-skin-sam");
+    Y.one("body").appendChild(results);
+
+    Y.use("test", "console", "selection", function (Y) {
+
+        var console = new Y.Console({
+            height : "500px",
+            width : "870px"
+        });
+
+        function getText (node) {
+            return Y.Lang.trim(
+                Y.Selection.getText(
+                    node
+                )
+            );
+        }
+
+        function getTextForSlide (number) {
+            return getText(Y.one("#slide" + number));
+        }
+
+        var suite = new Y.Test.Suite("Yeti Presentation");
+
+        suite.add(new Y.Test.Case({
+
+            name : "Slide Content",
+
+            "A title should exist" : function () {
+                Y.assert(getText(Y.one("title")), "Title should exist.");
+            },
+
+            "First slide should yell hello, world" : function () {
+
+                var expected = "Hello, world!",
+                    actual = getTextForSlide(2);
+                Y.Assert.areEqual(expected, actual);
+
+            },
+
+            "Developers should relate to this slide" : function () {
+                Y.assert(1); // duh.
+            },
+
+            "Your greeting should be event specific" : function () {
+
+                var expected = "Hello, YUIConf!",
+                    actual = getTextForSlide(DEMO_SLIDE);
+                Y.Assert.areEqual(expected, actual);
+
+            }
+
+        }));
+
+        console.render("#console");
+        // Don't show the console yet.
+        console.hide();
+
+        Y.Test.Runner.add(suite);
+        // Run the suite immediately.
+        Y.Test.Runner.run();
+
+        // When the time comes, show the console
+        // on top of the demo slide.
+
+        setup = function () {
+            if (Upstage.currentSlide != DEMO_SLIDE) return;
+            console.show();
+        };
+
+        teardown = function () {
+            console.hide();
+        }
+
+        setup();
+    });
+
+
+    Y.Upstage.fire("start");
+
+});
+</script>
+
+</body>

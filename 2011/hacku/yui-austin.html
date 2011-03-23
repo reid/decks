@@ -1,0 +1,423 @@
+<!doctype html>
+
+<title>Hack with YUI</title>
+
+<meta charset="utf-8">
+<meta name="author" content="Reid Burke<br>@reid">
+<meta name="copyright" content="- copyright not found -">
+
+<link rel="stylesheet" href="build/upstage-keynote-min.css" media="screen">
+
+<style>
+  
+.title h1, .title p {
+    padding: 0;
+    margin: 0;
+
+}
+
+.title p {
+    text-align: right;
+    font-size: 70%;
+    background: url(logo.png) no-repeat center center;
+    height: 500px;
+}
+
+.inline li {
+    float: left;
+    list-style: none;
+    padding: 10px;
+    margin: 7px;
+    background: #232323;
+    font-weight: bold;
+    font-size: 180%;
+}
+
+.inline li:last-child {
+    background: #343434;
+}
+
+.inline a {
+    text-align: center;
+}
+
+.bigtext {
+    font-size: 260%;
+}
+
+iframe {
+    width: 100%;
+    height: 90%;
+    border: 0;
+}
+
+
+</style>
+
+<body>
+
+<div id="bd">
+
+<div class="presentation">
+
+    <div class="slide title">
+        <h1>Hack with YUI</h1>
+        <p>Reid Burke<br>@reid</p>
+    </div>
+   
+<div class='slide bigtext'>
+
+
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>YUI exists to build web applications faster.</p>
+
+
+</div>
+<div class='slide '>
+<h1>What is YUI?</h1><p>The YUI Library is a set of utilities and controls, written with JavaScript and CSS, for building richly interactive web applications.</p>
+
+<p>Open source under the liberal BSD license.</p>
+
+<p>Driven by the YUI Team at Yahoo! and contributors around the world.</p>
+
+<p><a href="http://yuilibrary.com/">http://yuilibrary.com/</a></p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<p>1K new sites every month, among the top 1M sites.</p>
+
+<blockquote>
+YUI Library is the only other library that is gaining market share.
+</blockquote>
+
+
+<p><cite style="font-size: 50%">
+&mdash; <a href="http://w3techs.com/blog/entry/highlights_of_web_technology_surveys_march_2011">http://w3techs.com/blog/entry/highlights_of_web_technology_surveys_march_2011</a>
+</cite></p>
+
+</div>
+<div class='slide inline'>
+<!-- _S9SLIDE_  inline -->
+
+
+<p><a href="http://yuiblog.com/blog/category/in-the-wild/">http://yuiblog.com/blog/category/in-the-wild/</a></p>
+
+<ul>
+<li>Mint</li>
+<li>Target</li>
+<li>LinkedIn</li>
+<li>Microsoft</li>
+<li>Google</li>
+<li>Reuters</li>
+<li>Walgreens</li>
+<li>NFL</li>
+<li>Ford</li>
+<li>Harley-Davidson</li>
+<li>Flickr</li>
+<li>National Geographic</li>
+<li>Gatorade</li>
+<li>Duck Duck Go</li>
+<li>This Slideshow</li>
+</ul>
+
+
+
+</div>
+<div class='slide '>
+<h1>Why hack with YUI?</h1><ul>
+<li>You don't have time to fix bugs in your JavaScript</li>
+<li>Avoid reinventing the wheel
+
+<ul>
+<li>Core: Rock-solid DOM manipulation, events, and more</li>
+<li>Transition: Rich effects using CSS3</li>
+<li>Drag and Drop</li>
+<li>Gesture Events: Swipe, flick, and more for touch devices</li>
+<li>ScrollView: scroll on mobile devices</li>
+</ul>
+</li>
+</ul>
+
+
+
+</div>
+<div class='slide '>
+<h1>YUI</h1><pre><code>&lt;script
+    src="http://yui.yahooapis.com/3.3.0
+    /build/yui/yui-min.js"&gt;
+&lt;/script&gt;
+
+&lt;script&gt;
+YUI().use("node", function (Y) {
+    Y.one("#foo").addClass("highlight");
+});
+&lt;/script&gt;
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>Working with DOM: Events</h1><pre><code>// add a click handler to an element
+Y.one('#demo').on('click', 
+    function (e) {/*handle click*/});
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>Working with DOM: Append</h1><pre><code>// add content to an element
+Y.one('#demo').append('Added to #demo.');
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>Working with DOM: Event Delegation</h1><pre><code>// listen for any click on any &lt;li&gt;
+// that descends from #demo:
+Y.one('#demo').delegate('click',
+    function(e) {/*handle click*/}, 'li');
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>Working with DOM: Move Elements</h1><pre><code>// move #demo to the location of any click
+Y.one('document').on('click', function(e) {
+        Y.one('#demo').setXY([e.pageX, e.pageY]);
+    }
+);
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>Fancy Transitions</h1><p>Hello, HTML5!</p>
+
+<pre><code>Y.one('#demo').transition({
+    easing: 'ease-out',
+    duration: 2, // seconds
+    opacity: 0
+}, function() {
+    this.remove();
+});
+</code></pre>
+
+<p>Same API, doesn't matter if the browser supports CSS Transitions or not.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Ajax</h1><pre><code>Y.io('get.php', {
+    on: {
+        complete: function (id, response) {
+            var data = response.responseText;
+            // handle the response
+        }
+    }
+});
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>Extend with Y.use</h1><pre><code>Y.use('dd-drag', function(Y) {
+    var dd = new Y.DD.Drag({
+        node: '#foo'
+    });
+});
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>YQL</h1><pre><code>Y.use('yql', function (Y) {
+    var res = Y.one('#res'), zip = '90210';
+
+    Y.YQL('select * from weather.forecast'
+        + ' where location=' + zip, function (r) {
+
+        var item = r.query.results.channel.item;
+
+        var el = Y.Node.create('div'); 
+        el.setContent('&lt;h2&gt;Weather for '
+            + zip + '&lt;/h2&gt;'
+            + item.description);
+
+        res.appendChild(el); 
+    });
+});
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>YUI Gallery</h1><h2>The YUI of tomorrow, today.</h2>
+
+<ul>
+<li>Community collection of YUI 3 modules</li>
+<li>BSD license</li>
+<li>Hosted on Yahoo!'s CDN</li>
+</ul>
+
+
+<p><a href="http://yuilibrary.com/gallery/">http://yuilibrary.com/gallery/</a></p>
+
+<h2>AlloyUI Widgets</h2>
+
+<p>Ratings, paginator, resize, Loading Mask, "lozenges", inline editing, drag and drop sorting...</p>
+
+<p><a href="http://alloy.liferay.com/demos.php">http://alloy.liferay.com/demos.php</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>YUI 2</h1><p>You can easily use YUI 2.x widgets inside of YUI 3.</p>
+
+<pre><code>Y.use('yui2-datatable', function (Y) {
+    var YAHOO = Y.YUI2;
+    new YAHOO.widget.DataTable("basic");
+});
+</code></pre>
+
+<ul>
+<li>AutoComplete</li>
+<li>ImageCropper</li>
+<li>Color Picker</li>
+<li>SimpleDialog</li>
+<li>ProgressBar</li>
+</ul>
+
+
+
+</div>
+<div class='slide '>
+<h1>jQuery to YUI Rosetta Stone</h1><p>Great resource for jQuery users.</p>
+
+<ul>
+<li>Provides one-to-one reference from jQuery to YUI 3.</li>
+<li>Maintained by Paul Irish and the YUI Team.</li>
+</ul>
+
+
+<p><a href="http://jsrosettastone.com/">http://jsrosettastone.com/</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>YUI on Node.js</h1><p>You can use Node.js, jsdom, and YUI to manipulate pages on the server!</p>
+
+<ul>
+<li>Progressive enhancement</li>
+<li>Write once, works on the client and the server</li>
+<li>Our wrapper creates a simulated DOM for you</li>
+</ul>
+
+
+<p><a href="http://yuilibrary.com/projects/nodejs-yui3">http://yuilibrary.com/projects/nodejs-yui3</a></p>
+
+<h2>Easy installation</h2>
+
+<pre><code>$ npm install yui3
+</code></pre>
+
+<p>See <a href="http://npmjs.org">http://npmjs.org</a>.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Using YUI inside of Express</h1><p><a href="http://express.davglass.com/">http://express.davglass.com/</a></p>
+
+<pre><code>app.get('/three', function(req, res){
+    res.render('same.html', {
+        locals: {
+            content: '#content',
+            before: function(Y) {
+                Y.one('h1').set('innerHTML', 'Welcome to Page #3');
+            },
+            after: function(Y, options, partial) {
+                Y.one('title').set('innerHTML', 'Page #3');
+                Y.all('#nav li').removeClass('selected');
+                Y.one('#nav li.three').addClass('selected');
+            }
+    })
+});
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>YUI Reset, Fonts &amp; Grids</h1><p>Stylesheets that make your life easier.</p>
+
+<p>You want to use this. Just throw it in.</p>
+
+<p><a href="http://twitter.com/jhames/status/2372892872413185">People love it.</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>Reset &amp; Fonts</h1><p>Reset CSS makes browser styling consistent.</p>
+
+<p>Fonts CSS provides typographical normalization, while allowing users to change font size.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Grids</h1><p>Divide into three units.</p>
+
+<pre><code>&lt;div class="yui3-g"&gt;
+    &lt;div class="yui3-u"&gt;&lt;/div&gt;
+    &lt;div class="yui3-u"&gt;&lt;/div&gt;
+    &lt;div class="yui3-u"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<h2>Thanks.</h2>
+
+<ul>
+<li><a href="http://twitter.com/reid">@reid</a> on Twitter</li>
+<li><a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#114;&#x62;&#117;&#x72;&#x6b;&#x65;&#64;&#121;&#x61;&#x68;&#111;&#111;&#45;&#x69;&#110;&#x63;&#46;&#99;&#x6f;&#x6d;">&#114;&#98;&#x75;&#x72;&#x6b;&#101;&#x40;&#121;&#x61;&#104;&#x6f;&#x6f;&#x2d;&#x69;&#x6e;&#x63;&#46;&#x63;&#x6f;&#109;</a></li>
+</ul>
+
+
+<h2>Hack This Deck</h2>
+
+<ul>
+<li>Source code: <a href="http://github.com/reid/decks">http://github.com/reid/decks</a></li>
+<li>Slideshow system built on YUI 3: <a href="http://github.com/reid/upstage">http://github.com/reid/upstage</a></li>
+</ul>
+
+</div>
+
+
+</div>
+
+</div>
+
+<div id="ft">
+    <p class="credit">
+        HACKU 2011 &mdash; UT Austin
+    </p>
+</div>
+
+<script src="http://yui.yahooapis.com/3.3.0/build/yui/yui-min.js"></script>
+<script src="build/upstage-min.js"></script>
+<script src="build/lang/upstage-l10n.js"></script>
+<script>
+;YUI().use("upstage", function (Y) {
+
+    Y.Upstage.fire("start");
+
+});
+</script>
+
+</body>

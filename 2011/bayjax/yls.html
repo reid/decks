@@ -1,0 +1,554 @@
+<!doctype html>
+
+<title>Introducing YLS</title>
+
+<meta charset="utf-8">
+<meta name="author" content="Reid Burke<br>@reid">
+<meta name="copyright" content="2011 Yahoo! Inc., licensed under the BSD License.">
+
+<link rel="stylesheet" href="build/upstage-keynote-min.css" media="screen">
+
+<style>
+  
+.title h1, .title p {
+    padding: 0;
+    margin: 0;
+
+}
+
+.title p {
+    text-align: right;
+    font-size: 70%;
+    background: url(logo.png) no-repeat center center;
+    height: 500px;
+}
+
+.inline li {
+    float: left;
+    list-style: none;
+    padding: 10px;
+    margin: 7px;
+    background: #232323;
+    font-weight: bold;
+    font-size: 180%;
+}
+
+.inline li:last-child {
+    background: #343434;
+}
+
+.inline a {
+    text-align: center;
+}
+
+.bigtext {
+    font-size: 260%;
+}
+
+iframe {
+    width: 100%;
+    height: 90%;
+    border: 0;
+}
+
+.introducing {
+    font-size: 200%;
+    text-align: center;
+}
+
+.introducing .title {
+    font-size: 400%;
+    font-weight: bold;
+}
+
+</style>
+
+<body>
+
+<div id="bd">
+
+<div class="presentation">
+
+    <div class="slide title">
+        <h1>Introducing YLS</h1>
+        <p>Reid Burke<br>@reid</p>
+    </div>
+   
+<div class='slide bigtext'>
+
+
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>Applied Node.js.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>The YUI Library is widely used for building awesome websites.</p>
+
+</div>
+<div class='slide inline'>
+<!-- _S9SLIDE_  inline -->
+
+
+<p><a href="http://yuiblog.com/blog/category/in-the-wild/">http://yuiblog.com/blog/category/in-the-wild/</a></p>
+
+<ul>
+<li>Mint</li>
+<li>Target</li>
+<li>LinkedIn</li>
+<li>Reuters</li>
+<li>The Huffington Post</li>
+<li>Walgreens</li>
+<li>NFL</li>
+<li>Ford</li>
+<li>Harley-Davidson</li>
+<li>Flickr</li>
+<li>National Geographic</li>
+<li>Gatorade</li>
+<li>Yahoo!</li>
+<li>This Slideshow</li>
+</ul>
+
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>YUI is modular.</p>
+
+</div>
+<div class='slide inline'>
+<!-- _S9SLIDE_  inline -->
+
+
+<ul>
+<li>Async Queue</li>
+<li>AutoComplete</li>
+<li>Charts</li>
+<li>Dial</li>
+<li>Drag &amp; Drop</li>
+<li>History</li>
+<li>JSONP</li>
+<li>Resize</li>
+<li>Sortable</li>
+<li>Transition</li>
+<li>Uploader</li>
+<li>YQL</li>
+<li>and more</li>
+</ul>
+
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>Use only what you need.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Use statement</h1><h2>HTML</h2>
+
+<pre><code>&lt;script src="yui.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<h2>JavaScript</h2>
+
+<pre><code>YUI().use("yql", function (Y) {
+    Y.YQL("SELECT * FROM social.updates.search" +
+        " WHERE query='bayjax'", updateSite);
+});
+</code></pre>
+
+<p>Loads only YQL and its dependencies.</p>
+
+
+</div>
+<div class='slide '>
+<h1>YUI Loader</h1><p>Figures out the dependencies required by <code>use()</code>.</p>
+
+<p>Pulls them in automatically.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Loader Step-By-Step</h1><pre><code>YUI().use("yql", onComplete);
+</code></pre>
+
+<ol>
+<li>If <code>yql</code> isn't on the page, calculate its dependencies.</li>
+<li>Download <code>yql</code> and its dependencies in one request.</li>
+<li>Call <code>onComplete</code> when the dependencies are ready.</li>
+</ol>
+
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<p>The YUI seed makes a request like this:</p>
+
+<pre><code>http://yui.yahooapis.com/combo?
+    3.3.0/build/oop/oop-min.js
+    &amp;3.3.0/build/jsonp/jsonp-min.js
+    &amp;3.3.0/build/jsonp/jsonp-url-min.js
+    &amp;3.3.0/build/yql/yql-min.js
+</code></pre>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<pre><code>YUI().use("yql", function (Y) {
+    // When this function is called
+    // Y.YQL is ready to use!
+});
+</code></pre>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>That works pretty well.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>We saw an opportunity to make it better.</p>
+
+</div>
+<div class='slide introducing'>
+<!-- _S9SLIDE_  introducing -->
+
+
+<p>Introducing</p>
+
+<p class="title">YLS</p>
+
+
+<p>The YUI Loader Service</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>We put YUI Loader on the server.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Client-Side Loader</h1><p>When YUI needs a module:</p>
+
+<ul>
+<li>Download YUI metadata to the client.</li>
+<li>Calculate dependencies on the client.</li>
+<li>Download them all from a server.</li>
+</ul>
+
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>If we're loading modules, we need dependency information.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Let's Eliminate</h1><ul>
+<li>YUI metadata download.</li>
+<li>Dependency calculation.</li>
+</ul>
+
+
+
+</div>
+<div class='slide '>
+<h1>YUI with YLS</h1><p>The YUI seed makes a request like this:</p>
+
+<pre><code>http://yui.yahooapis.com/load?m=yql
+    &amp;env=yui&amp;v=3.3.0&amp;tests=0:1;1:0;2:0;3:1
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>Server-Side Loader</h1><p>When YUI needs a module:</p>
+
+<ul>
+<li>Download them all from a server.</li>
+</ul>
+
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>YLS makes YUI faster.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>YLS makes apps faster!</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>More benefits? Yes!</p>
+
+
+</div>
+<div class='slide '>
+<h1>Capability-based Loading</h1><p>YUI Loader already requests different code based on feature tests.</p>
+
+<p>That still works with YLS!</p>
+
+<pre><code>tests=0:1;1:0;2:0;3:1
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>Dependency Calculation</h1><p>When serving YLS requests, requests are cached with far-future Expires.</p>
+
+<p>No more client-side calculation.</p>
+
+
+</div>
+<div class='slide '>
+<h1>YLS Advantage</h1><ul>
+<li>Eliminates metadata download.</li>
+<li>Eliminates dependency calculation time.</li>
+</ul>
+
+
+<p>At the same time:</p>
+
+<ul>
+<li>Preserves capability-based loading.</li>
+<li>Uses the battle-tested YUI Loader code.</li>
+</ul>
+
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<p>An interlude for JavaScript Ninjas.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>There are still other ways to load YUI modules.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>That's okay!</p>
+
+<p>YUI can handle very application-specific requirements.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>YLS makes YUI faster with minimal effort.</p>
+
+
+</div>
+<div class='slide '>
+<h1>How Easy?</h1><pre><code>&lt;script src="//yui.example.com/
+    yui-rls-3.3.0-min.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+YUI().use("node", function (Y) {
+    Y.one("body").append(
+        Y.Node.create("It works!"));
+});
+&lt;/script&gt;
+</code></pre>
+
+<p>Just use the new seed file.</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<p>Enabled with a config flag.</p>
+
+<pre><code>&lt;script src="//yui.yahooapis.com/
+    3.4.0/build/yui/yui-min.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+YUI({
+    yls: true
+}).use("node", function (Y) {
+    Y.one("body").append(
+        Y.Node.create("It works!"));
+});
+&lt;/script&gt;
+</code></pre>
+
+<p>(Obviously subject to change.)</p>
+
+
+</div>
+<div class='slide '>
+<h1>How fast?</h1><p>Let's look at the <a href="http://localhost:3000">YUI Performance Tool</a>.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Server-Side JavaScript</h1><p>YLS runs on Node.js.</p>
+
+<p>Same YUI Loader used on the client.</p>
+
+<p>Based on Node.js on YUI by Dav Glass.</p>
+
+<p><a href="https://github.com/davglass/nodejs-yui3">https://github.com/davglass/nodejs-yui3</a></p>
+
+<p>He's giving a talk tomorrow at 1:30!</p>
+
+
+</div>
+<div class='slide '>
+<h1>CDN Hosting</h1><p>Yahoo! hosts YUI on a public CDN:</p>
+
+<pre><code>http://yui.yahooapis.com/yui/3.3.0/build/yui/yui.js
+</code></pre>
+
+<p>We get a ton of traffic.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Roadmap: YLS CDN</h1><p>We're bringing YLS to Yahoo!'s CDN.</p>
+
+<p>Client-side Loader is still available.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Roadmap: Open Source</h1><p>YLS will be released under the BSD license.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>Let's recap.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>YLS offloads loading YUI modules to a server.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>Browsers make fewer requests.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>Browsers no longer calculate dependencies in JavaScript.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>High-latency, slow browsers? Mobile devices.</p>
+
+<p>YLS makes YUI even better for mobile.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>We welcome your feedback.</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<h2>Thanks.</h2>
+
+<ul>
+<li><a href="http://twitter.com/reid">@reid</a> on Twitter</li>
+<li><a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#58;&#x72;&#98;&#x75;&#x72;&#x6b;&#101;&#x40;&#x79;&#97;&#x68;&#111;&#x6f;&#x2d;&#x69;&#110;&#99;&#46;&#99;&#x6f;&#109;">&#114;&#98;&#117;&#114;&#107;&#x65;&#64;&#x79;&#x61;&#x68;&#x6f;&#x6f;&#x2d;&#105;&#110;&#99;&#46;&#x63;&#111;&#109;</a></li>
+</ul>
+
+
+<h2>Node.js and YUI</h2>
+
+<ul>
+<li><a href="https://github.com/davglass/nodejs-yui3">https://github.com/davglass/nodejs-yui3</a></li>
+</ul>
+
+
+<h2>Hack This Deck</h2>
+
+<ul>
+<li>Source code: <a href="http://github.com/reid/decks">http://github.com/reid/decks</a></li>
+<li>Slideshow system built on YUI 3: <a href="http://github.com/reid/upstage">http://github.com/reid/upstage</a></li>
+</ul>
+
+</div>
+
+
+</div>
+
+</div>
+
+<div id="ft">
+    <p class="credit">
+        Bayjax at Yahoo! F2E 2011
+    </p>
+</div>
+
+<script src="http://yui.yahooapis.com/3.3.0/build/yui/yui-min.js"></script>
+<script src="build/upstage-min.js"></script>
+<script src="build/lang/upstage-l10n.js"></script>
+<script>
+;YUI().use("upstage", function (Y) {
+
+    Y.Upstage.fire("start");
+
+});
+</script>
+
+</body>

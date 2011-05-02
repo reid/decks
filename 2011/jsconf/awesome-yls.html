@@ -1,0 +1,600 @@
+<!doctype html>
+
+<title>Modules Made Awesome</title>
+
+<meta charset="utf-8">
+<meta name="author" content="Reid Burke<br>@reid">
+<meta name="copyright" content="2011 Yahoo! Inc., licensed under the BSD License.">
+
+<link rel="stylesheet" href="build/upstage-keynote-min.css" media="screen">
+
+<style>
+  
+.title h1, .title h2, .title p {
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    font-size: 100%;
+}
+
+.title p {
+    text-align: right;
+    font-size: 70%;
+}
+
+.title h2 {
+    font-weight: 100;
+    border-bottom: 1px solid #fff;
+}
+
+.inline li {
+    float: left;
+    list-style: none;
+    padding: 10px;
+    margin: 7px;
+    background: #232323;
+    font-weight: bold;
+    font-size: 180%;
+}
+
+.inline li:last-child {
+    background: #343434;
+}
+
+.inline a {
+    text-align: center;
+}
+
+.bigtext {
+    font-size: 260%;
+}
+
+iframe {
+    width: 100%;
+    height: 90%;
+    border: 0;
+}
+
+.introducing {
+    font-size: 200%;
+    text-align: center;
+}
+
+.introducing .title {
+    font-size: 400%;
+    font-weight: bold;
+}
+
+</style>
+
+<body>
+
+<div id="bd">
+
+<div class="presentation">
+
+    <div class="slide title">
+        <h1>Modules Made Awesome</h1>
+        <h2>Lessons Learned from YUI Loader on Node.js</h2>
+        <p>Reid Burke<br>@reid</p>
+    </div>
+   
+<div class='slide bigtext'>
+
+
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>Performance is important.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>Performance shouldn't be hard.</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<p><img src="logo.png" alt="YUI"></p>
+
+<p>Over 200 modules. Include only what you need.</p>
+
+
+</div>
+<div class='slide '>
+<h1>YUI 3 and Modules</h1><p>We ship things in small modules.</p>
+
+<p>Instead of the entire library, your pages get only what they need.</p>
+
+<p>Apps built with YUI can leverage this framework, too.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Where you find a loader...</h1><p>...you'll find dependencies.</p>
+
+<h2>How do you manage dependencies?</h2>
+
+<p>One way: <a href="http://developer.yahoo.com/yui/3/configurator/">YUI Configurator</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>Are we done?</h1><p>No.</p>
+
+<ul>
+<li>Manually updating a combo URL isn't a scalable way to manage your dependencies.</li>
+<li>Templates should be able to include script that defines what it needs.</li>
+<li>This should be handled automatically.</li>
+</ul>
+
+
+
+</div>
+<div class='slide '>
+<h1>YUI Loader</h1><p>In YUI 3, module loading is baked in.</p>
+
+<pre><code>YUI().use("yql", function (Y) {
+    // yql is attached to Y.YQL
+
+    Y.YQL("SELECT * FROM social.updates.search" +
+        " WHERE query='yui'", updateSite);
+});
+</code></pre>
+
+<p>Scripts just tell the page what it needs.</p>
+
+<p>No need to implement your own JS dependency manager.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Why Client-Side Modules, again?</h1><ul>
+<li>Increases performance: less code to deliver, parse</li>
+<li>Manage complexity: reduces cognitive load</li>
+</ul>
+
+
+<h2>What's the problem?</h2>
+
+<p>Developers often choose simplicity or performance. It's hard to get both.</p>
+
+<p>And if this process is hard, development is harder on you.</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<p>In YUI 3, it's easier to manage complexity.</p>
+
+<p>However, running YUI Loader on the client-side isn't free.</p>
+
+<ul>
+<li>Module metadata download. Cachable.</li>
+<li>Parsing metadata and calculating from it. Not cached, happens over and over.</li>
+</ul>
+
+
+<p>We never want to choice to be between simplicity or performance.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<h2>Introducing: YUI Loader Server.</h2>
+
+<p>YUI Loader as a web service.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Configurator-style Loading</h1><ul>
+<li><a href="http://localhost:3000/load?m=dd&amp;v=3.3.0">http://localhost:3000/load?m=dd&amp;v=3.3.0</a></li>
+<li><a href="http://localhost:3000/load?m=yql,console,io,jsonp&amp;v=3.3.0">http://localhost:3000/load?m=yql,console,io,jsonp&amp;v=3.3.0</a></li>
+</ul>
+
+
+<p>Why build your own URLs, though?</p>
+
+<p>There's an even better way...</p>
+
+
+</div>
+<div class='slide '>
+<h1>Client-side API</h1><p>With YLS, you'd use the same code as before.</p>
+
+<pre><code>YUI().use("yql", function (Y) {
+    // yql is attached to Y.YQL
+
+    Y.YQL("SELECT * FROM social.updates.search" +
+        " WHERE query='yui'", updateSite);
+});
+</code></pre>
+
+<p>Instead of downloading, parsing, and calculating module dependencies in the browser, we ask YLS for them.</p>
+
+<pre><code>http://yui.yahooapis.com/load?m=yql
+    &amp;env=yui&amp;v=3.3.0&amp;tests=0:1;1:0;2:0;3:1
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>YLS is Fast</h1><p>Dependency calculation is done on the server. Therefore, we get:</p>
+
+<ul>
+<li>Faster calculation on the server-side JS environment.</li>
+<li>No need to download module metadata like before.</li>
+</ul>
+
+
+
+</div>
+<div class='slide '>
+<h1>YLS is Smart</h1><p>When you go to the next page, the entire YLS response is cached.</p>
+
+<ul>
+<li>Zero calculation time: it's already been done.</li>
+<li>Likely has been done by a previous visitor. Fast!</li>
+</ul>
+
+
+<p>It's cached:</p>
+
+<ul>
+<li>In the browser, with far-future Expires headers.</li>
+<li>In the server, with its internal cache.</li>
+</ul>
+
+
+
+</div>
+<div class='slide '>
+<h1>YLS is Personal</h1><p>This isn't for just YUI's own modules.</p>
+
+<p>If you host your own server, it'll be able to handle your app's modules too.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Benchmark</h1><h2>Initial page load</h2>
+
+<p>A bit faster, since no metadata is downloaded and the server-side JavaScript calculates faster than your browser.</p>
+
+<h2>Second page load</h2>
+
+<p>Cached response. Calculation doesn't happen anymore.</p>
+
+<p>If the initial page load was done by someone else, you'll be faster from the start!</p>
+
+<p><a href="http://localhost:3010">Let's find out.</a></p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<p>With YUI 3.4.0, you'll be able to host YLS yourself.</p>
+
+<p>But you won't need to...</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>YUI will provide YUI Loader Server on Yahoo!'s CDN.</p>
+
+
+</div>
+<div class='slide '>
+<h1>YUI 3.4.0</h1><p>Enabled with a config flag.</p>
+
+<pre><code>&lt;script src="//yui.yahooapis.com/
+    3.4.0/build/yui/yui-min.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+YUI({
+    yls: true
+}).use("node", function (Y) {
+    Y.one("body").append(
+        Y.Node.create("It works!"));
+});
+&lt;/script&gt;
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>Details Matter</h1><h2>Capability-based loading</h2>
+
+<p>The small YUI seed, which provides the use() API, includes feature tests that are serialized into the YLS request.</p>
+
+<p>The server imports this client-side information when loading modules.</p>
+
+<h2>Modules already downloaded</h2>
+
+<p>Modules already on the page are sent to the server. Subsequent calls to use() will only download modules not yet on the page.</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<pre><code>/load?m=autocomplete&amp;env=node,event-custom-base,yui
+    &amp;tests=0:1;1:0;2:0;3:0;4:1;5:1;6:0
+</code></pre>
+
+<p>This URL is cache-friendly.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>We're using an early version of YLS in production on YUILibrary.com.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>We're working hard to bring this to everyone in 3.4.0.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>What else did we learn from doing this?</p>
+
+<p>How do we make it scale?</p>
+
+
+</div>
+<div class='slide '>
+<h1>The Basics: Server-Side YUI</h1><p>Created by Dav Glass. (@davglass)</p>
+
+<p><a href="https://github.com/davglass/nodejs-yui3">https://github.com/davglass/nodejs-yui3</a></p>
+
+<p>Allows YUI to easily run on Node.js.</p>
+
+<ul>
+<li>BSD licensed, open source.</li>
+<li>Ready to use today.</li>
+</ul>
+
+
+
+</div>
+<div class='slide '>
+<h1>Scaling YUI Loader</h1><p>YUI Loader performs a relatively expensive JavaScript computation.</p>
+
+<p>JavaScript is single-threaded.</p>
+
+<p>While computation is happening, server requests pile up.</p>
+
+
+</div>
+<div class='slide '>
+<h1>It's Important to Test</h1><p>We did a simple test of YLS on a machine with 2 CPU cores.</p>
+
+<p>Here's the difference between scaling with:</p>
+
+<ul>
+<li>Two servers spawned with Spark2</li>
+<li>One server with two YUI Loader workers</li>
+</ul>
+
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<p><img src="Mocha Performance.png"></p>
+
+
+</div>
+<div class='slide '>
+<h1>Avoid Blocking</h1><p>Node.js memory usage skyrockets when you let requests pile up.</p>
+
+<p>If you're doing anything expensive in JS, use a seperate process.</p>
+
+<p>Image processing, mathematics, etc.</p>
+
+<p>We're using WebWorkers for Node.js by Peter Griess.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Test Everything</h1><p>We're in a habit of finding the best performance in testing.</p>
+
+<p>Don't guess!</p>
+
+<p>Best YLS performance on 16 cores: 16 YLS processes, each with 1 YUI worker.</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<h2>Various configurations</h2>
+
+<p><img src="resp-time-n1-w8-16-gzip.png"></p>
+
+<ul>
+<li>n = Node.js YLS server processes</li>
+<li>w = YUI Loader worker processes</li>
+</ul>
+
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<h2>YUI Loader: inline vs. workers</h2>
+
+<p><img src="resp-time-n16-w012-gzip.png"></p>
+
+
+</div>
+<div class='slide '>
+<h1>Stress Testing Node.js Servers</h1><p>For small runs (less than 1 hour), nodeload works well.</p>
+
+<p>For long-term runs, use <a href="http://www.hpl.hp.com/research/linux/httperf/">httpperf</a>.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Client-Side Performance Testing</h1><p>We wanted to measure the time between:</p>
+
+<ul>
+<li>The onload event of the YUI seed JS file, and</li>
+<li>The execution of YUI's use() callback, when it's ready to run.</li>
+</ul>
+
+
+<p>I wasn't able to do this with JSPerf, since I need a clean slate for each run.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Testing with Iframes</h1><p>I used the YUI Performance Tool, which itself uses sandboxed iframes to run tests.</p>
+
+<ul>
+<li>Available under <code>sandbox/performance</code> in the YUI 3 GitHub repository.</li>
+<li><code>YUI().use("gallery-sandbox")</code> for sandboxed iframes.</li>
+</ul>
+
+
+<h2>Iframe Sandbox for Unit Tests</h2>
+
+<p>We're using the same sandbox module now to test YUI's use() API for 3.4.0.</p>
+
+<p>Useful for testing with a clean slate each test run.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Connect Middleware</h1><ul>
+<li>YLS doesn't use any default middleware.</li>
+<li><a href="">Middleware order</a> matters.</li>
+<li>Bookend middleware: normalize <a href="">request</a> and <a href="">response</a> objects. Makes upgrading Connect very easy.</li>
+<li>Helper methods, like <code>res.message(404, "Module not found.")</code> to send error <a href="">messages</a> from inside <a href="">error handling middleware</a> and request handlers.</li>
+<li>Override its default 404 by attaching a router with a <a href="">catch-all handler</a> last.</li>
+</ul>
+
+
+
+</div>
+<div class='slide '>
+<h1>Additional Node.js Lessons</h1><p>Code quality: JSLint. <a href="https://github.com/reid/node-jslint">https://github.com/reid/node-jslint</a></p>
+
+<p>HTTP testing: Pact. <a href="https://github.com/reid/pact">https://github.com/reid/pact</a></p>
+
+<p>Annotated code: Docco with JSDoc. <a href="https://github.com/reid/docco">https://github.com/reid/docco</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>Client-Side Lessons</h1><ul>
+<li>What if there's more than one use() call?</li>
+<li>What if 3rd party modules are used with YLS-served modules?</li>
+</ul>
+
+
+<p>The client-side is the hardest part, so far.</p>
+
+<p>We're working on making this really robust.</p>
+
+
+</div>
+<div class='slide '>
+<h1>The Future</h1><ul>
+<li>YUI 3.4.0.</li>
+<li>Open-source YLS, for your own modules.</li>
+</ul>
+
+
+<h2>Food for Thought</h2>
+
+<ul>
+<li>Using YUI modules only on the server?</li>
+<li>Option for Require.js on the client?</li>
+</ul>
+
+
+<p>There's a lot of possibilities!</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>Recap!</p>
+
+
+</div>
+<div class='slide '>
+<h1>Recap</h1><ul>
+<li>Client-side module loading is hard.</li>
+<li>Feature testing is important.</li>
+<li>YUI Loader Server will make this a bit easier.</li>
+<li>Don't settle for inefficient websites.</li>
+<li>One size doesn't fit all: test for yourself.</li>
+</ul>
+
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<h2>Thanks.</h2>
+
+<ul>
+<li><a href="http://twitter.com/reid">@reid</a> on Twitter</li>
+<li><a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#114;&#98;&#117;&#x72;&#107;&#x65;&#x40;&#121;&#97;&#x68;&#111;&#x6f;&#45;&#105;&#110;&#99;&#x2e;&#x63;&#111;&#x6d;">&#114;&#98;&#x75;&#114;&#x6b;&#101;&#x40;&#x79;&#97;&#x68;&#x6f;&#x6f;&#x2d;&#x69;&#110;&#99;&#46;&#x63;&#111;&#x6d;</a></li>
+</ul>
+
+
+<h2>Hack This Deck</h2>
+
+<ul>
+<li>Source code: <a href="http://github.com/reid/decks">http://github.com/reid/decks</a></li>
+<li>Slideshow system built on YUI 3: <a href="http://github.com/reid/upstage">http://github.com/reid/upstage</a></li>
+</ul>
+
+</div>
+
+
+</div>
+
+</div>
+
+<div id="ft">
+    <p class="credit">
+        JSConf 2011
+    </p>
+</div>
+
+<script src="http://yui.yahooapis.com/3.3.0/build/yui/yui-min.js"></script>
+<script src="build/upstage-min.js"></script>
+<script src="build/lang/upstage-l10n.js"></script>
+<script>
+;YUI().use("upstage", function (Y) {
+
+    Y.Upstage.fire("start");
+
+});
+</script>
+
+</body>

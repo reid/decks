@@ -1,0 +1,285 @@
+Title: Achieving Greatness with Node.js
+Subtitle: Practical hacking with JavaScript
+Author: Reid Burke<br>@reid
+Copyright: 2011 Yahoo! Inc., licensed under the BSD License.
+Footer: Open Hack Europe 2011
+
+%css
+
+.slide {
+    height: 768px;
+}
+
+#ft {
+    line-height: 28px;
+}
+
+.title {
+    background: url(title.png);
+    padding-left: 170px;
+}
+
+.title * {
+    width: 900px;
+}
+
+.title h1, .title h2, .title p {
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    font-size: 100%;
+}
+
+.title p {
+    text-align: right;
+    font-size: 70%;
+}
+
+.title h2 {
+    font-weight: 100;
+    border-bottom: 1px solid #fff;
+}
+
+.inline li {
+    float: left;
+    list-style: none;
+    padding: 10px;
+    margin: 7px;
+    background: #232323;
+    font-weight: bold;
+    font-size: 180%;
+}
+
+.inline li:last-child {
+    background: #343434;
+}
+
+.inline a {
+    text-align: center;
+}
+
+.bigtext {
+    font-size: 260%;
+}
+
+iframe {
+    width: 100%;
+    height: 90%;
+    border: 0;
+}
+
+.introducing {
+    font-size: 200%;
+    text-align: center;
+}
+
+.introducing .title {
+    font-size: 400%;
+    font-weight: bold;
+}
+%end
+
+# JavaScript
+
+Prototype-based, object-oriented scripting language.
+
+ - Web sites
+ - Widgets
+ - Browser extensions
+
+# JavaScript Everywhere
+
+ - [Yahoo! Connected TV](http://connectedtv.yahoo.com) widgets
+ - [HP webOS](http://palm.com) native apps
+ - [Universal remote controls](http://pronto.projgs.sk/down/DevelopersGuide_ProntoScript_Jan08.pdf)
+ - [Realtime stock trading apps](http://bloomberg.com)
+ - Many more!
+
+Most popular language on GitHub: <https://github.com/languages>
+
+# Server-Side JavaScript 
+
+Started in 1996: [Netscape LiveWire](http://docsrv.sco.com/INT_LiveWire/).
+
+Refined since then: AppJet, [EtherPad](http://etherpad.com/), [CommonJS](http://commonjs.org/).
+
+Used in Yahoo!'s [YQL](http://developer.yahoo.com/yql/).
+
+# Node.js
+
+Event-driven I/O framework for server-side JavaScript.
+
+Easily create scalable network apps, like web servers.
+
+Created in 2009. Uses the V8 JavaScript engine from Google.
+
+<http://nodejs.org/>
+
+# Hello, world!
+
+    var http = require('http');
+     
+    http.createServer(function (request, response) {
+        response.writeHead(200,
+            {'Content-Type': 'text/plain'});
+        response.end('Hello World\n');
+    }).listen(8000);
+     
+    console.log('Started at http://127.0.0.1:8000/');
+
+# Installing
+
+<http://awe.sm/5J9XI>
+% https://github.com/joyent/node/wiki/Installation
+
+ - Easy build on Linux, Mac, Solaris.
+ - Windows binaries available.
+ - Node.js Package Manager, `npm install anything`
+
+# Play
+
+Type `node` to start a REPL.
+
+% What's a REPL?
+
+    $ node
+    > console.log('Hello, Bucharest!');
+    Hello, Bucharest!
+
+Control-D to quit.
+
+Start a script file with `node script.js`.
+
+!SLIDE bigtext
+
+What can I build with this?
+
+# Socket.io
+
+`npm install socket.io`
+
+Easy realtime browser apps! <http://socket.io/>
+
+    <script src="//socket.io/socket.io.js"></script>
+    <script> 
+     var socket = new io.Socket({node_server_url}); 
+     socket.connect();
+     socket.on('connect', function(){ … }) 
+     socket.on('message', function(){ … }) 
+     socket.on('disconnect', function(){ … }) 
+    </script>
+
+# Smarmnation
+
+Using socket.io to create a realtime game.
+
+<http://swarmation.com/>
+
+# DNode
+
+`npm install dnode`
+
+Freestyle RPC between Node.js, the browser, Perl, Ruby and Java.
+
+<img src="dnode.png">
+
+<https://github.com/substack/dnode>
+
+# Realtime apps
+
+ - Games: massively-multiplayer is easy!
+ - Chatroom
+ - Shared whiteboard
+ - Live stock quotes
+ - Streaming charts with <http://smoothiecharts.org/>
+ - Your hack
+
+# Web Site Frameworks
+
+Node.js is not a web server, it's a framework to make one.
+
+Many projects exist to help build a web site.
+
+## Connect
+
+`npm install connect`
+
+Low-level middleware stack for creating HTTP servers.
+
+<http://github.com/senchalabs/connect>
+
+# Express
+
+`npm install express`
+
+    var app = express.createServer();
+
+    app.get('/', function(req, res){
+        res.send('Hello World');
+    });
+
+    app.listen(3000);
+
+Router, view rendering, configuration, etc.
+
+<http://expressjs.com/>
+
+# Debugger
+
+`npm install node-inspector`
+
+    node --debug-brk app.js
+    node-inspector
+
+# YUI on Node.js
+
+`npm install yui3`
+
+Run [YUI](http://yuilibrary.com) on Node.js!
+
+<https://github.com/davglass/nodejs-yui3>
+
+## Demo
+
+<http://express.davglass.com>
+
+# Serialport
+
+`npm install serialport`
+
+Talk to physical devices, like an Arduino.
+
+ - Interact with sensors
+ - Write to LED displays
+ - Physical controls: dials, switches, etc.
+
+# Arduno and Node.js
+
+Using a dial hooked up to an Arduino to seek a YouTube video.
+
+ - <http://popcornjs.com/> CHECK URL
+
+Taking JSON from YQL and writing it to a LED matrix.
+
+Control a R/C boat from a web browser.
+
+ - BOAT URL AWESOME
+
+!SLIDE
+
+## Thanks
+
+ - [@reid](https://twitter.com/reid) on Twitter
+ - <me@reidburke.com>
+ - <http://reidburke.com/>
+
+## Steal this deck
+
+ - Slideshow source: <https://github.com/reid/decks>
+ - Slideshow system based on YUI 3: <https://github.com/reid/upstage>
+
+% TODO
+% Convert to new PowerPoint template
+% Upload to GitHub decks
+% Let presenter computer owner know to install Chrome
+

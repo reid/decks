@@ -1,0 +1,508 @@
+<!doctype html>
+
+<title>Achieving Greatness with Node.js</title>
+
+<meta charset="utf-8">
+<meta name="author" content="Reid Burke &mdash; @reid">
+<meta name="copyright" content="2011 Yahoo! Inc., licensed under the BSD License.">
+
+<link rel="stylesheet" href="build/upstage-keynote-min.css" media="screen">
+
+<style>
+  /* sudo hackday */
+
+.slide {
+    background: #fff;
+    color: #000;
+    /* reset padding */
+    padding: 0;
+    width: 100%;
+}
+
+.title {
+    color: #fff;
+}
+
+.slide h1 {
+    background: #450057;
+    color: #fff;
+    padding: 15px;
+    margin: 0;
+}
+
+.title h1 {
+    background: transparent;
+}
+
+/* add padding to children */
+
+.slide h2, .slide p, .slide pre {
+    padding: 0 15px;
+}
+
+/* new code style */
+
+#bd code, #bd pre {
+    background: #dcdcdc;
+    text-shadow: none;
+}
+
+#bd pre {
+    border-color: #450057;
+    margin-left: 25px;
+}
+
+.slide a {
+    color: #333;
+}
+
+/* end hackday */
+.slide {
+    height: 768px;
+}
+
+#ft {
+    line-height: 28px;
+}
+
+.title {
+    background: url(title.png);
+    padding-top: 170px;
+    padding-left: 30px;
+    height: 580px;
+    width: 990px;
+    border: 1px solid #8c00a8;
+    border-width: 0 1px 1px 0;
+}
+
+.title * {
+    width: 900px;
+}
+
+.title h1, .title h2, .title p {
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    font-size: 100%;
+}
+
+.title p {
+    text-align: right;
+    font-size: 70%;
+}
+
+.title h2 {
+    font-weight: 100;
+    border-bottom: 1px solid #fff;
+}
+
+.inline li {
+    float: left;
+    list-style: none;
+    padding: 10px;
+    margin: 7px;
+    background: #232323;
+    font-weight: bold;
+    font-size: 180%;
+}
+
+.inline li:last-child {
+    background: #343434;
+}
+
+.inline a {
+    text-align: center;
+}
+
+.bigtext {
+    font-size: 260%;
+}
+
+iframe {
+    width: 100%;
+    height: 90%;
+    border: 0;
+}
+
+.introducing {
+    font-size: 200%;
+    text-align: center;
+}
+
+.introducing .title {
+    font-size: 400%;
+    font-weight: bold;
+}
+
+</style>
+
+<body>
+
+<div id="bd">
+
+<div class="presentation">
+
+    <div class="slide title">
+        <h1>Achieving Greatness with Node.js</h1>
+        <h2>Practical hacking with JavaScript</h2>
+        <p>Reid Burke &mdash; @reid</p>
+    </div>
+   
+<div class='slide '>
+<h1>JavaScript</h1><p>Prototype-based, object-oriented scripting language.</p>
+
+<ul>
+<li>Web sites</li>
+<li>Widgets</li>
+<li>Browser extensions</li>
+</ul>
+
+
+
+</div>
+<div class='slide '>
+<h1>JavaScript Everywhere</h1><ul>
+<li><a href="http://connectedtv.yahoo.com">Yahoo! Connected TV</a> widgets</li>
+<li><a href="http://palm.com">HP webOS</a> native apps</li>
+<li><a href="http://pronto.projgs.sk/down/DevelopersGuide_ProntoScript_Jan08.pdf">Universal remote controls</a></li>
+<li><a href="http://bloomberg.com">Realtime stock trading apps</a></li>
+<li>Many more!</li>
+</ul>
+
+
+<p>Most popular language on GitHub: <a href="https://github.com/languages">https://github.com/languages</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>Server-Side JavaScript</h1><p>Started in 1996: <a href="http://docsrv.sco.com/INT_LiveWire/">Netscape LiveWire</a>.</p>
+
+<p>Refined since then: AppJet, <a href="http://etherpad.com/">EtherPad</a>, <a href="http://commonjs.org/">CommonJS</a>.</p>
+
+<p>Used in Yahoo!'s <a href="http://developer.yahoo.com/yql/">YQL</a>.</p>
+
+
+</div>
+<div class='slide '>
+<h1>Node.js</h1><p>Event-driven I/O framework for server-side JavaScript.</p>
+
+<p><img src="nodejs.png" style="padding: 15px; background: #22252a; float: right;"></p>
+
+<p>Easily create scalable network apps, like web servers.</p>
+
+<p>Created in 2009. Uses the V8 JavaScript engine from Google.</p>
+
+<p><a href="http://nodejs.org/">http://nodejs.org/</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>Hello, world!</h1><pre><code>var http = require('http');
+
+http.createServer(
+    function (request, response) {
+        response.writeHead(200,
+            {'Content-Type': 'text/plain'});
+        response.end('Hello World\n');
+}).listen(8000);
+
+console.log('Started at
+    http://127.0.0.1:8000/');
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>Installing</h1><p><a href="http://bit.ly/howtonode">http://bit.ly/howtonode</a></p>
+
+<ul>
+<li>Easy build on Linux, Mac, Solaris.</li>
+<li>Windows binaries available.</li>
+<li>Node.js Package Manager</li>
+</ul>
+
+
+
+</div>
+<div class='slide '>
+<h1>Node.js Package Manager</h1><p><a href="http://bit.ly/howtonode">http://bit.ly/howtonode</a> &mdash; Step 4</p>
+
+<p><img src="npm.png"></p>
+
+<p>The package manager for Node.js modules.</p>
+
+<pre><code>npm install modulename
+var foo = require('modulename');
+</code></pre>
+
+<p>Registry: <a href="http://search.npmjs.org/">http://search.npmjs.org/</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>Play</h1><p>Type <code>node</code> to start a REPL.</p>
+
+<pre><code>$ node
+&gt; console.log('Hello, Bucharest!');
+Hello, Bucharest!
+</code></pre>
+
+<p>Control-D to quit.</p>
+
+<p>Start a script file with <code>node script.js</code>.</p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+
+<p>What can I build with this?</p>
+
+
+</div>
+<div class='slide '>
+<h1>Socket.io</h1><p><code>npm install socket.io</code></p>
+
+<p>Easy realtime browser apps! <a href="http://socket.io/">http://socket.io/</a></p>
+
+<pre><code>&lt;script src="//socket.io/socket.io.js"&gt;
+&lt;/script&gt;&lt;script&gt; 
+ var socket = new io.Socket({url}); 
+ socket.connect();
+ socket.on('connect', function(){ … }) 
+ socket.on('message', function(){ … }) 
+ socket.on('disconnect', function(){ … }) 
+&lt;/script&gt;
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>Smarmation</h1><p>Using socket.io to create a realtime game.</p>
+
+<p><a href="http://swarmation.com/">http://swarmation.com/</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>DNode</h1><p><code>npm install dnode</code></p>
+
+<p>Freestyle RPC between Node.js, the browser, Perl, Ruby and Java.</p>
+
+<p><img src="dnode.png"></p>
+
+<p><a href="https://github.com/substack/dnode">https://github.com/substack/dnode</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>Realtime apps</h1><ul>
+<li>Games: massively-multiplayer is easy!</li>
+<li>Chatroom</li>
+<li>Shared whiteboard</li>
+<li>Live stock quotes</li>
+<li>Streaming charts with <a href="http://smoothiecharts.org/">http://smoothiecharts.org/</a></li>
+<li>Your hack</li>
+</ul>
+
+
+
+</div>
+<div class='slide '>
+<h1>Web Site Frameworks</h1><p>Node.js is not a web server, it's a framework to make one.</p>
+
+<p>Many projects exist to help build a web site.</p>
+
+<h2>Connect</h2>
+
+<p><code>npm install connect</code></p>
+
+<p>Low-level middleware stack for creating HTTP servers.</p>
+
+<p><a href="http://github.com/senchalabs/connect">http://github.com/senchalabs/connect</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>Express</h1><p><code>npm install express</code></p>
+
+<pre><code>var app = express.createServer();
+
+app.get('/', function(req, res){
+    res.send('Hello World');
+});
+
+app.listen(3000);
+</code></pre>
+
+<p>Router, view rendering, configuration, etc.</p>
+
+<p><a href="http://expressjs.com/">http://expressjs.com/</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>Debugger</h1><p><code>npm install node-inspector</code></p>
+
+<p>Works for any Node.js program. Handy!</p>
+
+<pre><code>node --debug-brk app.js
+node-inspector
+</code></pre>
+
+<p>You can now debug your app in WebKit browser.</p>
+
+<pre><code>node --debug # Enable debug mode
+node --debug-brk # Break on startup
+</code></pre>
+
+<p><a href="http://nodejs.org/docs/latest/api/debugger.html">http://nodejs.org/docs/latest/api/debugger.html</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>Node.js API</h1><p><a href="http://nodejs.org/docs/latest/api/">http://nodejs.org/docs/latest/api/</a></p>
+
+<ul>
+<li>HTTP, UDP, DNS, TLS/SSL, Crypto, File System</li>
+<li>Child process spawning</li>
+<li>Events
+
+<ul>
+<li><code>.on</code> vs. <code>.once</code></li>
+<li><code>.removeListener</code></li>
+</ul>
+</li>
+<li>Buffers: fast way to handle large data</li>
+<li>Much more</li>
+</ul>
+
+
+
+</div>
+<div class='slide '>
+<h1>jsdom</h1><p><code>npm install jsdom</code></p>
+
+<p>Implementation of the W3C DOM. Headless browser!</p>
+
+<pre><code>var jsdom = require("jsdom");
+jsdom.env("http://nodejs.org/dist/", [
+  'http://yui.yahooapis.com/3.3.0/build/simpleyui/simpleyui-min.js'
+], function(errors, window) {
+  console.log("there have been",
+    window.YUI.all("a").size(),
+    "nodejs releases!");
+});
+</code></pre>
+
+<p><a href="https://github.com/tmpvar/jsdom">https://github.com/tmpvar/jsdom</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>YUI on Node.js</h1><p><code>npm install yui3</code></p>
+
+<p>Run <a href="http://yuilibrary.com">YUI</a> on Node.js!</p>
+
+<p><a href="https://github.com/davglass/nodejs-yui3">https://github.com/davglass/nodejs-yui3</a></p>
+
+<h2>Demo</h2>
+
+<p><a href="http://express.davglass.com">http://express.davglass.com</a></p>
+
+
+</div>
+<div class='slide '>
+<h1>Serialport</h1><pre style="font-size: 40%">
+  eeeee eeeee eeeee eeee       e  eeeee 
+  8   8 8  88 8   8 8          8  8   " 
+  8e  8 8   8 8e  8 8eee       8e 8eeee 
+  88  8 8   8 88  8 88      e  88    88 
+  88  8 8eee8 88ee8 88ee 88 8ee88 8ee88
+
+  eeeee eeee eeeee  e  eeeee e     eeeee eeeee eeeee eeeee 
+  8   " 8    8   8  8  8   8 8     8   8 8  88 8   8   8   
+  8eeee 8eee 8eee8e 8e 8eee8 8e    8eee8 8   8 8eee8e  8e  
+     88 88   88   8 88 88  8 88    88    8   8 88   8  88  
+  8ee88 88ee 88   8 88 88  8 88eee 88    8eee8 88   8  88
+</pre>
+
+
+<p><code>npm install serialport</code></p>
+
+<p>Talk to physical devices, like an Arduino.</p>
+
+<ul>
+<li>Interact with sensors</li>
+<li>Write to LED displays</li>
+<li>Physical controls: dials, switches, etc.</li>
+</ul>
+
+
+
+</div>
+<div class='slide '>
+<h1>Arduno and Node.js</h1><p>Using a physical dial to seek a YouTube video synced to many devices.</p>
+
+<ul>
+<li><a href="http://popcornjs.com/">http://popcornjs.com/</a></li>
+</ul>
+
+
+<p>Control a R/C boat from a web browser.</p>
+
+<ul>
+<li><a href="http://bit.ly/nodeboat">http://bit.ly/nodeboat</a></li>
+</ul>
+
+
+<p>Taking JSON from YQL and writing it to a LED matrix.</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+
+<p>This is just the beginning!</p>
+
+<h2>Thanks</h2>
+
+<ul>
+<li><a href="https://twitter.com/reid">@reid</a> on Twitter</li>
+<li><a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#58;&#109;&#101;&#x40;&#x72;&#101;&#x69;&#x64;&#x62;&#x75;&#x72;&#x6b;&#x65;&#x2e;&#99;&#111;&#x6d;">&#109;&#101;&#64;&#114;&#101;&#105;&#100;&#98;&#117;&#114;&#x6b;&#x65;&#46;&#x63;&#x6f;&#109;</a></li>
+<li><a href="http://reidburke.com/">http://reidburke.com/</a></li>
+</ul>
+
+
+<h2>Steal this deck</h2>
+
+<ul>
+<li>Slideshow source: <a href="https://github.com/reid/decks">https://github.com/reid/decks</a></li>
+<li>Slideshow system based on YUI 3: <a href="https://github.com/reid/upstage">https://github.com/reid/upstage</a></li>
+</ul>
+
+</div>
+
+
+</div>
+
+</div>
+
+<div id="ft">
+    <p class="credit">
+        Open Hack Europe 2011
+    </p>
+</div>
+
+<script src="http://yui.yahooapis.com/3.3.0/build/yui/yui-min.js"></script>
+<script src="build/upstage-min.js"></script>
+<script src="build/lang/upstage-l10n.js"></script>
+<script>
+;YUI().use("upstage", function (Y) {
+
+    Y.Upstage.fire("start");
+
+});
+</script>
+
+</body>

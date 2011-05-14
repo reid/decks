@@ -286,6 +286,23 @@ Hello, Bucharest!
 
 </div>
 <div class='slide '>
+<h1>NowJS</h1><p><code>npm install now</code> &mdash; <a href="http://nowjs.com/">http://nowjs.com/</a></p>
+
+<pre><code>var nowjs = require("now");
+var everyone = nowjs.initialize(httpServer);
+
+everyone.now.getServerInfo = function(callback){
+  db.doQuery(callback);
+}
+
+&lt;script&gt;now.getServerInfo(function(data){
+  // data contains the query results
+});&lt;/script&gt;
+</code></pre>
+
+
+</div>
+<div class='slide '>
 <h1>DNode</h1><p><code>npm install dnode</code></p>
 
 <p>Freestyle RPC between Node.js, the browser, Perl, Ruby and Java.</p>

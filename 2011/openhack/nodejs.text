@@ -245,6 +245,21 @@ Using socket.io to create a realtime game.
 
 <http://swarmation.com/>
 
+# NowJS
+
+`npm install now` &mdash; <http://nowjs.com/>
+
+    var nowjs = require("now");
+    var everyone = nowjs.initialize(httpServer);
+
+    everyone.now.getServerInfo = function(callback){
+      db.doQuery(callback);
+    }
+
+    <script>now.getServerInfo(function(data){
+      // data contains the query results
+    });</script>
+
 # DNode
 
 `npm install dnode`
@@ -321,6 +336,42 @@ You can now debug your app in WebKit browser.
     - `.removeListener`
  - Buffers: fast way to handle large data
  - Much more
+
+# Callbacks
+
+    var file = "/etc/redhat-release";
+    fs.stat(file, function(err, stat) {
+        if (stat.isFile()) {
+            fs.readFile(file, function(err, file) {
+                postRequest("http://example.com", file, function (err, response) {
+                    if (response.status === 200) {
+                        db.save(file, function (err) {
+                            next();
+                        });
+                    }
+                });
+            });
+        }
+    });
+
+# Better Callbacks
+
+    var file = "/etc/redhat-release";
+
+    function onPost(err, response) {
+        if (response.status !== 200) throw err;
+        db.save(file, next);
+    }
+
+    function onRead(err, file) {
+        postRequest("http://example.com", file, onPost);
+    }
+
+    function onStat(err, stat) {
+        if (stat.isFile()) fs.readFile(file, onRead);
+    }
+
+    fs.stat(file, onStat);
 
 # jsdom
 

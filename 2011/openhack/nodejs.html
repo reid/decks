@@ -399,6 +399,46 @@ node --debug-brk # Break on startup
 
 </div>
 <div class='slide '>
+<h1>Callbacks</h1><pre><code>var file = "/etc/redhat-release";
+fs.stat(file, function(err, stat) {
+    if (stat.isFile()) {
+        fs.readFile(file, function(err, file) {
+            postRequest("http://example.com", file, function (err, response) {
+                if (response.status === 200) {
+                    db.save(file, function (err) {
+                        next();
+                    });
+                }
+            });
+        });
+    }
+});
+</code></pre>
+
+
+</div>
+<div class='slide '>
+<h1>Better Callbacks</h1><pre><code>var file = "/etc/redhat-release";
+
+function onPost(err, response) {
+    if (response.status !== 200) throw err;
+    db.save(file, next);
+}
+
+function onRead(err, file) {
+    postRequest("http://example.com", file, onPost);
+}
+
+function onStat(err, stat) {
+    if (stat.isFile()) fs.readFile(file, onRead);
+}
+
+fs.stat(file, onStat);
+</code></pre>
+
+
+</div>
+<div class='slide '>
 <h1>jsdom</h1><p><code>npm install jsdom</code></p>
 
 <p>Implementation of the W3C DOM. Headless browser!</p>

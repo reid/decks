@@ -69,6 +69,7 @@ Footer: Open Hack Europe 2011
     width: 990px;
     border: 1px solid #8c00a8;
     border-width: 0 1px 1px 0;
+    font-size: 64px;
 }
 
 .title * {
@@ -332,7 +333,7 @@ Implementation of the W3C DOM. Headless browser!
       'http://yui.yahooapis.com/3.3.0/build/simpleyui/simpleyui-min.js'
     ], function(errors, window) {
       console.log("there have been",
-        window.YUI.all("a").size(),
+        window.Y.all("a").size(),
         "nodejs releases!");
     });
 

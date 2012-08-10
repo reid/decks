@@ -1,19 +1,19 @@
-Title: Achieving Greatness with Node.js
-Subtitle: Practical hacking with JavaScript
-Author: @reid
+Title: How to Win with Node.js
+Author: by @reid
 Copyright: 2012 Yahoo! Inc., licensed under the BSD License.
-Footer: Open Hack India 2012
+Footer: Yahoo! <strong>Open Hack India</strong> 2012
 
 %css
 /* sudo hackday */
 
 @import url("http://fonts.googleapis.com/css?family=Belgrano|Dosis:400,800");
+@import url("cube.css");
 
 .deck-container {
     font-family: Dosis, sans-serif;
 }
 
-.slide {
+.deck-container > .slide {
     background: #fff;
     color: #000;
     /* reset padding */
@@ -22,27 +22,42 @@ Footer: Open Hack India 2012
     font-size: 200%;
 }
 
-.title {
-    padding-top: 0.5em !important;
-    font-size: 6em;
+.deck-container > .title {
+    padding-top: 1em !important;
+    font-size: 4em;
+    background: #8729CF;
 }
 
 .title h1 {
     text-align: left;
+    margin: 0;
+}
+
+.title p {
+    display: inline;
+    margin: 0;
+    font-size: 1.25em;
+    line-height: 1.5em;
+    color: #fff;
 }
 
 .slide h1 {
     background: #450057;
     color: #fff;
-    padding: 15px;
+    padding: 20px;
     margin: 0;
     font-weight: 800;
+}
+
+.deck-container .title h1 {
+    padding: 20px;
+    margin: 0;
 }
 
 /* add padding to children */
 
 .slide h2, .slide p, .slide pre {
-    padding: 0 15px;
+    padding: 0 20px;
 }
 
 /* new code style */
@@ -62,9 +77,6 @@ Footer: Open Hack India 2012
 }
 
 /* end hackday */
-.slide {
-    height: 768px;
-}
 
 #ft {
     position: absolute;
@@ -83,28 +95,13 @@ Footer: Open Hack India 2012
     border-width: 0 1px 1px 0;
     font-size: 64px;
 }
-*/
 
 .title * {
     width: 900px;
-}
-
-.title h1, .title h2, .title p {
-    padding: 0;
-    margin: 0;
-    text-align: left;
-    font-size: 100%;
-}
-
-.title p {
-    text-align: right;
-    font-size: 70%;
-}
-
-.title h2 {
     font-weight: 100;
     border-bottom: 1px solid #fff;
 }
+*/
 
 .inline li {
     float: left;
@@ -125,7 +122,7 @@ Footer: Open Hack India 2012
 }
 
 .bigtext {
-    font-size: 260%;
+    font-size: 5em;
 }
 
 iframe {
@@ -153,15 +150,13 @@ Prototype-based, object-oriented scripting language.
  - Widgets
  - Browser extensions
 
+Most popular language on GitHub: <https://github.com/languages>
+
 # JavaScript Everywhere
 
  - [Yahoo! Connected TV](http://connectedtv.yahoo.com) widgets
- - [HP webOS](http://palm.com) native apps
  - [Universal remote controls](http://pronto.projgs.sk/down/DevelopersGuide_ProntoScript_Jan08.pdf)
  - [Realtime stock trading apps](http://bloomberg.com)
- - Many more!
-
-Most popular language on GitHub: <https://github.com/languages>
 
 # Server-Side JavaScript 
 
@@ -175,13 +170,23 @@ Used in Yahoo!'s [YQL](http://developer.yahoo.com/yql/).
 
 Event-driven I/O framework for server-side JavaScript.
 
-<img src="nodejs.png" style="padding: 15px; background: #22252a; float: right;">
+<img src="nodejs.png" style="padding: 15px; background: #fff; float: right;">
 
 Easily create scalable network apps, like web servers.
 
 Created in 2009. Uses the V8 JavaScript engine from Google.
 
 <http://nodejs.org/>
+
+# Node.js Everywhere
+
+- Yahoo!
+- Microsoft
+- LinkedIn
+- Uber
+- Mozilla
+- Voxer
+- Many, many more
 
 # Hello, world!
 
@@ -199,25 +204,27 @@ Created in 2009. Uses the V8 JavaScript engine from Google.
 
 # Installing
 
-<http://bit.ly/howtonode>
-% https://github.com/joyent/node/wiki/Installation
+Easy installers for Windows and OS X.
 
- - Easy build on Linux, Mac, Solaris.
- - Windows binaries available.
- - Node.js Package Manager
+<http://nodejs.org/#download>
+
+Easily compiled from source on Linux and Solaris.
+
+% <http://bit.ly/howtonode>
+% https://github.com/joyent/node/wiki/Installation
 
 # Node.js Package Manager
 
-<http://bit.ly/howtonode> &mdash; Step 4
+<img src="npm.png" style="float: right">
 
-<img src="npm.png">
+Bundled with Node.js.
+
+<http://npmjs.org>
 
 The package manager for Node.js modules.
 
     npm install modulename
     var foo = require('modulename');
-
-Registry: <http://search.npmjs.org/>
 
 # Play
 
@@ -226,8 +233,8 @@ Type `node` to start a REPL.
 % What's a REPL?
 
     $ node
-    > console.log('Hello, Bucharest!');
-    Hello, Bucharest!
+    > console.log('Hello, Bangalore!');
+    Hello, Bangalore!
 
 Control-D to quit.
 
@@ -237,41 +244,19 @@ Start a script file with `node script.js`.
 
 What can I build with this?
 
-# Socket.io
+# SockJS
 
-`npm install socket.io`
+`npm install sockjs`
 
-Easy realtime browser apps! <http://socket.io/>
+Cross-browser WebSockets. <http://sockjs.org>
 
-    <script src="//socket.io/socket.io.js">
+    <script src="http://cdn.sockjs.org/sockjs-0.3.min.js">
     </script><script> 
-     var socket = new io.Socket({url}); 
-     socket.connect();
-     socket.on('connect', function(){ … }) 
-     socket.on('message', function(){ … }) 
-     socket.on('disconnect', function(){ … }) 
+     var sock = new SockJS("http://hackday.org/tower");
+     sock.onopen = function(){ … }); 
+     sock.onmessage = function(ev){ … });
+     sock.onclose = function(){ … });
     </script>
-
-# Smarmation
-
-Using socket.io to create a realtime game.
-
-<http://swarmation.com/>
-
-# NowJS
-
-`npm install now` &mdash; <http://nowjs.com/>
-
-    var nowjs = require("now");
-    var everyone = nowjs.initialize(httpServer);
-
-    everyone.now.getServerInfo = function(callback){
-      db.doQuery(callback);
-    }
-
-    <script>now.getServerInfo(function(data){
-      // data contains the query results
-    });</script>
 
 # DNode
 
@@ -310,10 +295,11 @@ Low-level middleware stack for creating HTTP servers.
 
 `npm install express`
 
-    var app = express.createServer();
+    var express = require('express');
+    var app = express();
 
     app.get('/', function(req, res){
-        res.send('Hello World');
+        res.send('Hello, Bangalore!');
     });
 
     app.listen(3000);
@@ -394,7 +380,7 @@ Implementation of the W3C DOM. Headless browser!
 
     var jsdom = require("jsdom");
     jsdom.env("http://nodejs.org/dist/", [
-      'http://yui.yahooapis.com/3.3.0/build/simpleyui/simpleyui-min.js'
+      'http://yui.yahooapis.com/3.5.0/build/simpleyui/simpleyui-min.js'
     ], function(errors, window) {
       console.log("there have been",
         window.Y.all("a").size(),
@@ -411,9 +397,13 @@ Run [YUI](http://yuilibrary.com) on Node.js!
 
 <https://github.com/davglass/nodejs-yui3>
 
-## Demo
-
 <http://express.davglass.com>
+
+<img src="mojito.png" style="padding: 15px; background: #fff; float: right;">
+
+High-performance, device-independent HTML5 applications with Yahoo! Mojito.
+
+<http://developer.yahoo.com/cocktails/mojito/>
 
 # Serialport
 
@@ -439,17 +429,25 @@ Talk to physical devices, like an Arduino.
  - Write to LED displays
  - Physical controls: dials, switches, etc.
 
-# Arduno and Node.js
+# Node.js and Hardware
 
-Using a physical dial to seek a YouTube video synced to many devices.
-
- - <http://popcornjs.com/>
-
-Control a R/C boat from a web browser.
-
- - <http://bit.ly/nodeboat>
-
+<ul>
+<li class="slide">
+Hardware MIDI controller: <http://tmpvar.com/project/tmpad/>
+</li>
+<li class="slide">
+Using a physical dial to seek a YouTube video synced to many devices: <http://popcornjs.com/>
+</li>
+<li class="slide">
+Control a R/C boat from a web browser: <http://bit.ly/nodeboat>
+</li>
+<li class="slide">
+Make your robot detect and avoid obstacles: <http://youtu.be/GVGMjsKy3WQ>
+</li>
+<li class="slide">
 Taking JSON from YQL and writing it to a LED matrix.
+</li>
+</ul>
 
 !SLIDE
 
@@ -459,12 +457,6 @@ This is just the beginning!
 
  - [@reid](https://twitter.com/reid) on Twitter
  - <http://reidburke.com/>
-
-## Steal this deck
-
-<p class="bigtext">
-<a href="http://bit.ly/hacknode">http://bit.ly/hacknode</a>
-</p>
 
 # About this slideshow
 

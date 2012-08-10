@@ -27,16 +27,19 @@ Footer: Yahoo! <strong>Open Hack India</strong> 2012
     background: #2F81C2;
 }
 
+.csstransforms .deck-container .title > * {
+    -webkit-transform: rotate(-3deg); 
+    -moz-transform: rotate(-3deg); 
+}
+
 .title h1 {
     text-align: left;
     margin: 0;
 }
 
 .title p {
-    display: inline;
-    margin: 0;
+    margin: 0.25em 0;
     font-size: 1.25em;
-    line-height: 1.5em;
     color: #fff;
 }
 
@@ -46,6 +49,16 @@ Footer: Yahoo! <strong>Open Hack India</strong> 2012
     padding: 20px;
     margin: 0;
     font-weight: 800;
+}
+
+.contact h2 {
+    background: #1C2C56;
+    color: #fff;
+    padding: 20px;
+    margin: 0 0 0.25em 0;
+    display: inline-block;
+    font-weight: 800;
+    font-size: 1em;
 }
 
 .deck-container .title h1 {
@@ -124,6 +137,26 @@ Footer: Yahoo! <strong>Open Hack India</strong> 2012
     font-size: 200% !important;
 }
 
+.contact ul {
+    font-size: 150%;
+    margin: 0;
+    padding: 0.5em;
+    display: inline-block;
+    border: 1px solid #2F81C2;
+    background: #87CBFF;
+}
+
+.contact li a {
+    color: #1C2C56;
+    text-decoration: none;
+}
+
+.contact li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+    
 iframe {
     width: 100%;
     height: 90%;
@@ -171,15 +204,35 @@ Created in 2009. Uses the V8 JavaScript engine from Google.
 
 <http://nodejs.org/>
 
-# Node.js Everywhere
+!SLIDE bigtext title
 
-- Yahoo!
-- Microsoft
-- LinkedIn
-- Uber
-- Mozilla
-- Voxer
-- Many, many more
+Node.js is used by <span class="slide">
+Joyent
+</span>
+<span class="slide">
+Yahoo!,
+</span>
+<span class="slide">
+Microsoft,
+</span>
+<span class="slide">
+LinkedIn,
+</span>
+<span class="slide">
+Uber,
+</span>
+<span class="slide">
+Mozilla,
+</span>
+<span class="slide">
+Voxer,
+</span>
+<span class="slide">
+AT&T
+</span>
+<span class="slide">
+& your hack.
+</span>
 
 # Hello, world!
 
@@ -235,9 +288,13 @@ Control-D to quit.
 
 Start a script file with `node script.js`.
 
-!SLIDE bigtext
+!SLIDE title bigtext
 
 What can I build with this?
+
+!SLIDE title bigtext
+
+**Realtime** web apps.
 
 # SockJS
 
@@ -321,6 +378,10 @@ You can now debug your app in WebKit browser.
 
 <http://nodejs.org/docs/latest/api/debugger.html>
 
+!SLIDE title bigtext
+
+Understand the API.
+
 # Node.js API
 
 <img src="nodejs.png" style="padding: 15px; background: #fff; float: right;">
@@ -355,6 +416,10 @@ Buffers: fast way to handle large data
 Much more
 </li>
 </ul>
+
+!SLIDE title bigtext
+
+Avoid nested callbacks.
 
 # Callbacks
 
@@ -396,6 +461,10 @@ function onStat(err, stat) {
 fs.stat(file, onStat);
 </pre>
 
+!SLIDE bigtext title
+
+Put some **Client-Side** on your **Server-Side**!
+
 # jsdom
 
 `npm install jsdom`
@@ -428,6 +497,10 @@ Run [YUI](http://yuilibrary.com) on Node.js!
 High-performance, device-independent HTML5 applications with Yahoo! Mojito.
 
 <http://developer.yahoo.com/cocktails/mojito/>
+
+!SLIDE title bigtext
+
+Talk to the **real world**.
 
 # Serialport
 
@@ -473,12 +546,22 @@ Taking JSON from YQL and writing it to a LED matrix.
 </li>
 </ul>
 
-!SLIDE bigtext
+!SLIDE title contact
 
-This is just the beginning!
-
- - **[@reid](https://twitter.com/reid)** on Twitter
- - **<http://reid.in/>**
+<h2>How to Win with Node.js</h2>
+<ul>
+<li>
+<strong>Reid Burke</strong> Yahoo! Inc.
+</li>
+<li class="slide">
+<strong><a href="mailto:hackday@reid.in">hackday@reid.in</a></strong>
+</li>
+<li>
+<span class="slide">Follow <a href="http://twitter.com/reid">@reid</a></span>
+<span class="slide">or visit <a href="http://reid.in/">reid.in</a></a></span>
+</li>
+</ul>
+<p class="slide">Thank you & happy hacking.</p>
 
 # About this slideshow
 

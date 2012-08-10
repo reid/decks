@@ -180,9 +180,13 @@ Most popular language on GitHub: <https://github.com/languages>
 
 # JavaScript Everywhere
 
- - [Yahoo! Connected TV](http://connectedtv.yahoo.com) widgets
+JavaScript isn't found on just websites.
+
+ - Television sets via [Yahoo! Connected TV](http://connectedtv.yahoo.com)
  - [Universal remote controls](http://pronto.projgs.sk/down/DevelopersGuide_ProntoScript_Jan08.pdf)
  - [Realtime stock trading apps](http://bloomberg.com)
+
+<p class="slide">Finally, there's Server-Side JavaScript.</p>
 
 # Server-Side JavaScript 
 
@@ -192,22 +196,28 @@ Refined since then: AppJet, [EtherPad](http://etherpad.com/), [CommonJS](http://
 
 Used in Yahoo!'s [YQL](http://developer.yahoo.com/yql/).
 
+!SLIDE bigtext title
+
+Evented I/O for JavaScript.
+
 # Node.js
 
-Event-driven I/O framework for server-side JavaScript.
+Evented I/O for V8 JavaScript.
 
 <img src="nodejs.png" style="padding: 15px; background: #fff; float: right;">
 
 Easily create scalable network apps, like web servers.
 
-Created in 2009. Uses the V8 JavaScript engine from Google.
+Created in 2009.
+
+Uses the V8 JavaScript engine from Google.
 
 <http://nodejs.org/>
 
-!SLIDE bigtext title
+!SLIDE title
 
 Node.js is used by <span class="slide">
-Joyent
+Joyent,
 </span>
 <span class="slide">
 Yahoo!,
@@ -484,13 +494,26 @@ jsdom.env("http://nodejs.org/dist/", [
 
 <https://github.com/tmpvar/jsdom>
 
+!SLIDE title
+
+<img src="yuilogo.png" style="width: 500px; height: 240px; float: right; padding: 10px;">
+
+YUI is seriously awesome.
+
+<span class="slide">Hack stuff fast on your <strong>server</strong> or <strong>browser</strong>.</span>
+<span class="slide">Don't miss the YUI workshop later today.</span>
+
 # YUI on Node.js
+
+<img src="yuilogo.png" style="width: 250px; height: 120px; float: right; padding: 10px;">
 
 `npm install yui3`
 
 Run [YUI](http://yuilibrary.com) on Node.js!
 
 <https://github.com/davglass/nodejs-yui3>
+
+<div style="clear:both"></div>
 
 <img src="mojito.png" style="padding: 15px; background: #fff; float: right;">
 
@@ -546,6 +569,13 @@ Taking JSON from YQL and writing it to a LED matrix.
 </li>
 </ul>
 
+# Node KO
+
+Get inspired.
+
+ - <http://2011.nodeknockout.com/>
+ - <http://2010.nodeknockout.com/>
+
 !SLIDE title contact
 
 <h2>How to Win with Node.js</h2>
@@ -561,7 +591,12 @@ Taking JSON from YQL and writing it to a LED matrix.
 <span class="slide">or visit <a href="http://reid.in/">reid.in</a></a></span>
 </li>
 </ul>
-<p class="slide">Thank you & happy hacking.</p>
+
+!SLIDE title
+
+<img src="yuilogo.png" style="width: 500px; height: 240px; float: right; padding: 10px;">
+
+See you at the YUI workshop!
 
 # About this slideshow
 

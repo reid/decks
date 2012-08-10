@@ -6,8 +6,7 @@ Footer: Yahoo! <strong>Open Hack India</strong> 2012
 %css
 /* sudo hackday */
 
-@import url("http://fonts.googleapis.com/css?family=Belgrano|Dosis:400,800");
-@import url("cube.css");
+@import url("http://fonts.googleapis.com/css?family=Dosis:400,800");
 
 .deck-container {
     font-family: Dosis, sans-serif;
@@ -25,7 +24,7 @@ Footer: Yahoo! <strong>Open Hack India</strong> 2012
 .deck-container > .title {
     padding-top: 1em !important;
     font-size: 4em;
-    background: #8729CF;
+    background: #2F81C2;
 }
 
 .title h1 {
@@ -42,7 +41,7 @@ Footer: Yahoo! <strong>Open Hack India</strong> 2012
 }
 
 .slide h1 {
-    background: #450057;
+    background: #1C2C56;
     color: #fff;
     padding: 20px;
     margin: 0;
@@ -63,12 +62,11 @@ Footer: Yahoo! <strong>Open Hack India</strong> 2012
 /* new code style */
 
 #bd code, #bd pre {
-    background: #dcdcdc;
+    background: #efefef;
     text-shadow: none;
 }
 
 #bd pre {
-    border-color: #450057;
     margin-left: 25px;
 }
 
@@ -121,8 +119,9 @@ Footer: Yahoo! <strong>Open Hack India</strong> 2012
     text-align: center;
 }
 
-.bigtext {
-    font-size: 5em;
+.bigtext p,
+.bigtext li {
+    font-size: 200% !important;
 }
 
 iframe {
@@ -131,14 +130,8 @@ iframe {
     border: 0;
 }
 
-.introducing {
-    font-size: 200%;
-    text-align: center;
-}
-
-.introducing .title {
-    font-size: 400%;
-    font-weight: bold;
+.deck-container h2 {
+    border-color: #1C2C56;
 }
 %end
 
@@ -190,17 +183,19 @@ Created in 2009. Uses the V8 JavaScript engine from Google.
 
 # Hello, world!
 
-    var http = require('http');
-     
-    http.createServer(
-        function (request, response) {
-            response.writeHead(200,
-                {'Content-Type': 'text/plain'});
-            response.end('Hello World\n');
-    }).listen(8000);
-     
-    console.log('Started at
-        http://127.0.0.1:8000/');
+<pre class="prettyprint">
+var http = require('http');
+
+http.createServer(
+    function (request, response) {
+        response.writeHead(200,
+            {'Content-Type': 'text/plain'});
+        response.end('Hello World\n');
+}).listen(8000);
+
+console.log('Started at
+    http://127.0.0.1:8000/');
+</pre>
 
 # Installing
 
@@ -295,14 +290,16 @@ Low-level middleware stack for creating HTTP servers.
 
 `npm install express`
 
-    var express = require('express');
-    var app = express();
+<pre class="prettyprint">
+var express = require('express');
+var app = express();
 
-    app.get('/', function(req, res){
-        res.send('Hello, Bangalore!');
-    });
+app.get('/', function(req, res){
+    res.send('Hello, Bangalore!');
+});
 
-    app.listen(3000);
+app.listen(3000);
+</pre>
 
 Router, view rendering, configuration, etc.
 
@@ -326,51 +323,78 @@ You can now debug your app in WebKit browser.
 
 # Node.js API
 
+<img src="nodejs.png" style="padding: 15px; background: #fff; float: right;">
+
 <http://nodejs.org/docs/latest/api/>
 
- - HTTP, UDP, DNS, TLS/SSL, Crypto, File System
- - Child process spawning
- - Events
-    - `.on` vs. `.once`
-    - `.removeListener`
- - Buffers: fast way to handle large data
- - Much more
+<ul>
+<li class="slide">
+HTTP, UDP, DNS, TLS/SSL, Crypto, File System
+</li>
+<li class="slide">
+Streams: powerful concept used everywhere
+</li>
+<li class="slide">
+Child process spawning
+</li>
+<li class="slide">
+Events
+</li>
+<ul>
+<li class="slide">
+   <code>.on</code> vs. <code>.once</code>
+</li>
+<li class="slide">
+   <code>.removeListener</code>
+</li>
+</ul>
+<li class="slide">
+Buffers: fast way to handle large data
+</li>
+<li class="slide">
+Much more
+</li>
+</ul>
 
 # Callbacks
 
-    var file = "/etc/redhat-release";
-    fs.stat(file, function(err, stat) {
-        if (stat.isFile()) {
-            fs.readFile(file, function(err, file) {
-                postRequest("http://example.com", file, function (err, response) {
-                    if (response.status === 200) {
-                        db.save(file, function (err) {
-                            next();
-                        });
-                    }
-                });
+<pre class="prettyprint">
+var file = "/etc/redhat-release";
+fs.stat(file, function(err, stat) {
+    if (stat.isFile()) {
+        fs.readFile(file, function(err, file) {
+            postRequest("http://example.com", file, function (err, response) {
+                if (response.status === 200) {
+                    db.save(file, function (err) {
+                        next();
+                    });
+                }
             });
-        }
-    });
+        });
+    }
+});
+</pre>
 
 # Better Callbacks
 
-    var file = "/etc/redhat-release";
+<pre class="prettyprint">
+var file = "/etc/redhat-release";
 
-    function onPost(err, response) {
-        if (response.status !== 200) throw err;
-        db.save(file, next);
-    }
+function onPost(err, response) {
+    if (response.status !== 200) throw err;
+    db.save(file, next);
+}
 
-    function onRead(err, file) {
-        postRequest("http://example.com", file, onPost);
-    }
+function onRead(err, file) {
+    postRequest("http://example.com", file, onPost);
+}
 
-    function onStat(err, stat) {
-        if (stat.isFile()) fs.readFile(file, onRead);
-    }
+function onStat(err, stat) {
+    if (stat.isFile()) fs.readFile(file, onRead);
+}
 
-    fs.stat(file, onStat);
+fs.stat(file, onStat);
+</pre>
 
 # jsdom
 
@@ -378,14 +402,16 @@ You can now debug your app in WebKit browser.
 
 Implementation of the W3C DOM. Headless browser!
 
-    var jsdom = require("jsdom");
-    jsdom.env("http://nodejs.org/dist/", [
-      'http://yui.yahooapis.com/3.5.0/build/simpleyui/simpleyui-min.js'
-    ], function(errors, window) {
-      console.log("there have been",
-        window.Y.all("a").size(),
-        "nodejs releases!");
-    });
+<pre class="prettyprint">
+var jsdom = require("jsdom");
+jsdom.env("http://nodejs.org/dist/", [
+  'http://yui.yahooapis.com/3.5.0/build/simpleyui/simpleyui-min.js'
+], function(errors, window) {
+  console.log("there have been",
+    window.Y.all("a").size(),
+    "nodejs releases!");
+});
+</pre>
 
 <https://github.com/tmpvar/jsdom>
 
@@ -396,8 +422,6 @@ Implementation of the W3C DOM. Headless browser!
 Run [YUI](http://yuilibrary.com) on Node.js!
 
 <https://github.com/davglass/nodejs-yui3>
-
-<http://express.davglass.com>
 
 <img src="mojito.png" style="padding: 15px; background: #fff; float: right;">
 
@@ -449,14 +473,12 @@ Taking JSON from YQL and writing it to a LED matrix.
 </li>
 </ul>
 
-!SLIDE
+!SLIDE bigtext
 
 This is just the beginning!
 
-## Thanks
-
- - [@reid](https://twitter.com/reid) on Twitter
- - <http://reidburke.com/>
+ - **[@reid](https://twitter.com/reid)** on Twitter
+ - **<http://reid.in/>**
 
 # About this slideshow
 

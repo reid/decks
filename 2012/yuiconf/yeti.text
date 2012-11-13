@@ -518,8 +518,26 @@ Prioritize your testing strategy.
 
 !SLIDE hero
 
+What code is changing?
+
+!SLIDE hero
+
 Semantic Versioning<br>
 <span class="deem line">Project-level stability contract</span>
+
+!SLIDE hero
+
+X.Y.Z
+
+!SLIDE bigtext l
+
+- 0.1.0
+- 0.2.0
+- 0.2.1
+- 1.0.0
+- 1.0.1
+- 1.1.0
+- 2.0.0
 
 !SLIDE hero
 
@@ -582,6 +600,10 @@ Test what matters most.
 
 No software. Only browsers.
 
+!SLIDE hero
+
+<img src="nodejs.png">
+
 !SLIDE bigtext
 
  - Share browsers among your team
@@ -591,6 +613,10 @@ No software. Only browsers.
  - QUnit and YUI Test
  - Release every week
  - Help wanted
+
+!SLIDE hero
+
+CONTRIBUTING.md
 
 !SLIDE hero
 

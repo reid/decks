@@ -6,14 +6,16 @@ Footer: <strong>YUIConf</strong> 2012
 %css
 /* sudo hackday */
 
-@import url("http://fonts.googleapis.com/css?family=Raleway:500,800");
+@import url("http://fonts.googleapis.com/css?family=Lora|Raleway:500,800");
 
-body {
+.yui3-js-enabled body {
     overflow: hidden;
 }
 
 .deck-container {
     font-family: Raleway, sans-serif;
+    letter-spacing: -0.1em;
+    font-style:normal;
 }
 
 /*
@@ -152,7 +154,7 @@ body {
 
 .bigtext p,
 .bigtext li {
-    font-size: 200% !important;
+    font-size: 160% !important;
 }
 
 .hero {
@@ -166,7 +168,7 @@ body {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    font-size: 300% !important;
+    font-size: 150% !important;
 }
 
 .l p,
@@ -215,18 +217,27 @@ iframe {
 
 .quote blockquote {
     font-size: 200%;
-    font-family: Georgia, serif;
+}
+
+blockquote {
+    font-family: Lora, Georgia, serif;
 }
 
 .bigquote p {
-    font-size: 170%;
+    font-size: 120%;
 }
-
 
 .bigquote blockquote {
-    font-size: 400%;
+    font-size: 300%;
 }
 
+.full p {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+}
 .deck-container h2 {
 /*    border-color: #1C2C56;
 */
@@ -256,17 +267,9 @@ How does it work?
 
 !SLIDE hero
 
-<span class="line">Your code is not working yet.</span>
-<span class="slide line">
-Working code = Code without bugs
-</span>
-<span class="slide line">You clearly define "bugs"</span>
-
-!SLIDE hero
-
-<span class="line">But testing only helps.</span>
+<span class="line">Testing only helps.</span>
 <span class="slide b line">
-Working code ≠ Tested code
+Tested code ≠ Working code
 </span>
 
 !SLIDE quote bigquote
@@ -275,23 +278,31 @@ Working code ≠ Tested code
 Testing shows the presence, not the absence of bugs
 </blockquote>
 
-&mdash; **Edsger W. Dijkstra**, [J.N. Buxton and B. Randell, eds, Software Engineering Techniques, April 1970, p. 16. Report on a conference sponsored by the NATO Science Committee, Rome, Italy, 27–31 October 1969.](http://homepages.cs.ncl.ac.uk/brian.randell/NATO/nato1969.PDF)
+&mdash; **Edsger W. Dijkstra**, [J.N. Buxton and B. Randell, eds, Software Engineering Techniques, April 1970, p. 16.](http://homepages.cs.ncl.ac.uk/brian.randell/NATO/nato1969.PDF)
 
 !SLIDE hero
 
-Testing is a tool, not the endgame.
+Testing is a tool, not the goal.
 
 !SLIDE hero
 
-Writing tests first ≠ Working code
+Antipattern
 
 !SLIDE hero
 
-Lots of tests ≠ Working code
+Writing tests first ≠
+<span class="line">Working code</span>
 
 !SLIDE hero
 
-100% line coverage ≠ Working code <br><span class="slide deem line">(but it helps)</span>
+Lots of tests ≠
+<span class="line">Working code</span>
+
+!SLIDE hero
+
+100% line coverage ≠
+<span class="line">Working code</span>
+<br><span class="slide deem line">(but it helps)</span>
 
 !SLIDE hero bigtext b
 
@@ -321,29 +332,84 @@ When coding on a team, I modify my strategy to carefully test code that we, coll
 
 !SLIDE hero l
 
-Kent Beck wrote that. <span class="slide">He is the <strong>creator of Test Driven Development</strong> methodology.
+Kent Beck wrote that. <span class="slide">Known for advancing <strong>Test Driven Development</strong>.
 </span>
 
 !SLIDE title
 
-FTW. <a href="http://stackoverflow.com/a/153565">stackoverflow.com/a/153565</a>
-
+<a href="http://stackoverflow.com/a/153565">
 <img src="beck.png">
+</a>
+
+!SLIDE hero l
+
+He also was one of the 17 original signatories of the <strong>Agile Manifesto</strong>.
 
 !SLIDE hero
 
-**You are not paid to write tests.**
+What's agile again?
+
+!SLIDE
+
+The Agile Manifesto.
+
+<blockquote>
+<p class="slide">
+We are uncovering better ways of developing software by doing it and helping others do it.
+</p>
+
+<p class="slide">
+Through this work we have come to value:
+<ul>
+<li class="slide">
+Individuals and interactions over processes and tools
+</li>
+<li class="slide">
+Working software over comprehensive documentation
+</li>
+<li class="slide">
+Customer collaboration over contract negotiation
+</li>
+<li class="slide">
+Responding to change over following a plan
+</li>
+</ul>
+</p>
+
+<p class="slide">
+That is, while there is value in the items on the right, we value the items on the left more.
+</p>
+</blockquote>
+
+!SLIDE hero
+
+Working software &gt; comprehensive docs
+
+!SLIDE hero
+
+Working software &gt; talking about it
+
+!SLIDE hero
+
+Working software &gt; metrics about it
+
+!SLIDE hero
+
+Working software &gt; green blinkenlights
 
 !SLIDE hero bigtext
 
-Over-testing...
-<span class="slide">No harm done, right?</span>
+Over-testing
 
 !SLIDE hero
 
-<img src="dhs.png">
+<img src="dhs.png" style="height: 600px; width: 600px;">
 
-!SLIDE title
+!SLIDE full
+
+<a href="http://www.flickr.com/photos/sixmilliondollardan/3382932556/" title="security screening at denver airport by Inha Leex Hale, on Flickr"><img src="http://farm4.staticflickr.com/3460/3382932556_cab88a86f3_b.jpg" width="1024" height="768" alt="security screening at denver airport"></a>
+
+!SLIDE full
 
 <a href="http://37signals.com/svn/posts/3159-testing-like-the-tsa">
 <img src="Testing like the TSA.png">
@@ -391,16 +457,16 @@ High coverage by useless tests.
 
 !SLIDE bigtext
 
-Sensible testing.
+Be sensible.
 
- - Code-to-test ratio about 1:2
- - Integration testing is for integration
+ - Code-to-test ratio
  - Test the smallest thing first
- - 1/3 of development time spent testing
+ - Integration testing is for integration
+ - Too much time writing tests
 
-!SLIDE hero
+!SLIDE title bigtext
 
-**Consider the unseen metrics.**
+Consider the unseen metrics.
 
 !SLIDE hero
 
@@ -436,7 +502,11 @@ In the meantime, experimentation seems in order.
 
 !SLIDE hero
 
-**TDD is for tweaking.**
+Test Driven Development<span class="slide line"> &amp; Agile</span><span class="slide line"> &amp; your creative process</span> <span class="line">is for experimenting.</span>
+
+!SLIDE hero
+
+We experiment to make great code.
 
 !SLIDE title bigtext
 
@@ -444,21 +514,52 @@ If you can't test everything, what should you test?
 
 !SLIDE hero
 
+Prioritize your testing strategy.
+
+!SLIDE hero
+
+Semantic Versioning<br>
+<span class="deem line">Project-level stability contract</span>
+
+!SLIDE hero
+
+?<br>
+<span class="deem line">Section-level stability contract</span>
+
+!SLIDE hero
+
 <img src="nodejs.png">
 
 !SLIDE hero
 
-The Node.js Stability Index.
+Stability Index<br>
+<span class="deem line">Section-level stability contract</span>
 
 !SLIDE quote
 
 <blockquote>
-Throughout the documentation, you will see indications of a section’s stability. The Node.js API is still somewhat changing, and as it matures, certain parts are more reliable than others. Some are so proven, and so relied upon, that they are unlikely to ever change at all. Others are brand new and experimental, or known to be hazardous and in the process of being redesigned.
+Throughout the documentation, you will see indications of a section’s stability. The Node.js API is still somewhat changing, and as it matures, certain parts are more reliable than others.
+</blockquote>
+
+!SLIDE quote
+
+<blockquote>
+Some are so proven, and so relied upon, that they are unlikely to ever change at all. Others are brand new and experimental, or known to be hazardous and in the process of being redesigned.
 </blockquote>
 
 &mdash; The Node.js [Stability Index](
 http://nodejs.org/docs/v0.8.10/api/documentation.html#documentation_stability_
 index) documentation.
+
+!SLIDE hero
+
+"How reliable is this?"<br>
+<span class="line deem">Helps your customers.</span>
+
+!SLIDE hero
+
+Priortize your testing strategy.<br>
+<span class="line deem">Helps your team.</span>
 
 !SLIDE bigtext
 
@@ -469,34 +570,13 @@ index) documentation.
  - API Frozen
  - Locked
 
-!SLIDE hero
-
-Start by assigning an Index to each section of your code.
-
-!SLIDE hero
-
-The more stable, the more attention it gets.
-
-!SLIDE hero
-
-**Give priority to what matters most.**
-
 !SLIDE title bigtext
 
-I make a tool that helps you do run your tests.
-**It's called Yeti.**
+Test what matters most.
 
 !SLIDE hero
 
-Test JavaScript in any browser.
-
-!SLIDE
-
-<iframe src="http://yeti.cx" style="height: 1000px"></iframe>
-
-!SLIDE hero
-
-[yeti.cx](http://yeti.cx)
+<iframe src="http://yeti.cx" style="height: 1000px">Yeti</iframe>
 
 !SLIDE hero
 
@@ -514,13 +594,31 @@ No software. Only browsers.
 
 !SLIDE hero
 
-Yeti on every build. <img src="yuilogo.png" style="width: 500px; height: 240px;">
+[yeti.cx](http://yeti.cx)
+
+!SLIDE hero
+
+Yeti helps us. <img src="yuilogo.png" style="width: 500px; height: 240px;">
+
+!SLIDE title bigtext
+
+Yeti is a tool that makes sure your code works.
+
+!SLIDE hero
+
+Your code is ultimately up to you.
 
 !SLIDE hero quote bigquote l
 
 <blockquote>
 In the meantime, experimentation seems in order.
 </blockquote>
+
+!SLIDE title bigtext
+
+More on my blog.
+
+<img src="Write Code That Works by Reid Burke.png">
 
 !SLIDE hero
 
@@ -531,60 +629,16 @@ Go experiment.
 <h2>Write Code That Works</h2>
 <ul>
 <li>
-<strong>Reid Burke</strong> Yahoo! Inc.
-</li>
-<li class="slide">
-<strong><a href="mailto:yuiconf@reidburke.com">yuiconf@reidburke.com</a></strong>
+<strong>Reid Burke</strong>
 </li>
 <li>
-<span class="slide">Follow <a href="http://twitter.com/reid">@reid</a></span>
-<span class="slide">or visit <a href="http://reid.in/">reid.in</a></a></span>
+<span><a href="http://twitter.com/reid">@reid</a> on Twitter</span>
 </li>
 </ul>
 
-!SLIDE title bigtext
+Thanks for attending.
 
-More on my blog.
+# Colophon
 
-<img src="Write Code That Works by Reid Burke.png">
-
-!SLIDE title
-
-<img src="yuilogo.png" style="width: 500px; height: 240px; float: right; padding: 10px;">
-
-Thanks for attending this talk.
-
-# About this slideshow
-
- - Slideshow source: <https://github.com/reid/decks>
- - Slideshow system based on YUI 3: <https://github.com/reid/upstage>
-
-!SLIDE title
-
-Node.js is used by <span class="slide">
-Joyent,
-</span>
-<span class="slide">
-Yahoo!,
-</span>
-<span class="slide">
-Microsoft,
-</span>
-<span class="slide">
-LinkedIn,
-</span>
-<span class="slide">
-Uber,
-</span>
-<span class="slide">
-Mozilla,
-</span>
-<span class="slide">
-Voxer,
-</span>
-<span class="slide">
-AT&T
-</span>
-<span class="slide">
-& your hack.
-</span>
+Presented by the [Upstage](https://github.com/reid/upstage/) presentation system.
+Built with [YUI](http://yuilibrary.com).

@@ -6,11 +6,22 @@ Footer: <strong>YUIConf</strong> 2012
 %css
 /* sudo hackday */
 
-@import url("http://fonts.googleapis.com/css?family=Dosis:400,800");
+@import url("http://fonts.googleapis.com/css?family=Raleway:500,800");
+
+body {
+    overflow: hidden;
+}
 
 .deck-container {
-    font-family: Dosis, sans-serif;
+    font-family: Raleway, sans-serif;
 }
+
+/*
+.deck-container p {
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+*/
 
 .deck-container > .slide {
     background: #fff;
@@ -211,6 +222,7 @@ iframe {
     font-size: 170%;
 }
 
+
 .bigquote blockquote {
     font-size: 400%;
 }
@@ -239,9 +251,8 @@ What does that code do?
 
 !SLIDE hero
 
-When does it work?
+How does it work?
 <span class="slide b line">Not by writing tests.</span>
-
 
 !SLIDE hero
 

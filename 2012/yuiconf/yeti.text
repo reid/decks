@@ -247,6 +247,50 @@ blockquote {
 
 !SLIDE hero
 
+This is a talk about **software testing**
+
+!SLIDE hero
+
+"When not to write tests"<br>
+<span class="deem line">(Alternate title)</span>
+
+!SLIDE hero
+
+Time is limited
+
+!SLIDE hero
+
+Yeti<br>
+<span class="deem line">The YUI Easy Testing Interface</span>
+
+!SLIDE hero
+
+Test JavaScript with any browser
+
+!SLIDE hero
+
+No driver. Only browsers.
+
+!SLIDE hero
+
+<img src="nodejs.png">
+
+!SLIDE bigtext
+
+ - Share browsers among your team
+ - Share devices among your team
+ - More browsers means faster results
+ - Works with Jenkins
+ - QUnit and YUI Test
+ - Release every week
+ - CONTRIBUTING.md
+
+!SLIDE hero
+
+Yeti helps us <img src="yuilogo.png" style="width: 500px; height: 240px;">
+
+!SLIDE hero
+
 What are you building?
 <span class="slide b line">Something.</span>
 
@@ -267,8 +311,8 @@ How does it work?
 
 !SLIDE hero
 
-<span class="line">Testing only helps.</span>
-<span class="slide b line">
+<span class="line">Testing only helps.</span><br>
+<span class="deem line">
 Tested code ≠ Working code
 </span>
 
@@ -282,7 +326,7 @@ Testing shows the presence, not the absence of bugs
 
 !SLIDE hero
 
-Testing is a tool, not the goal.
+Testing is a tool, not the goal
 
 !SLIDE hero
 
@@ -315,7 +359,8 @@ Listen to a smart guy.
 !SLIDE hero quote bigquote l
 
 <blockquote>
-I get paid for code that works, not for tests<span class="slide">, so my philosophy is to test as little as possible to reach a given level of confidence</span>
+I get paid for code that works, not for tests<span class="slide">, so 
+my philosophy is to test as little as possible to reach a given level of confidence</span>
 </blockquote>
 
 !SLIDE hero quote bigquote l
@@ -474,7 +519,7 @@ We forgot about our own productivity.
 
 !SLIDE hero
 
-More wisdom from Kent Beck.
+More wisdom from Kent Beck
 
 !SLIDE hero quote bigquote l
 
@@ -527,9 +572,9 @@ Semantic Versioning<br>
 
 !SLIDE hero
 
-X.Y.Z
+**X.Y.Z**
 
-!SLIDE bigtext l
+!SLIDE bigtext b l
 
 - 0.1.0
 - 0.2.0
@@ -572,12 +617,12 @@ index) documentation.
 !SLIDE hero
 
 "How reliable is this?"<br>
-<span class="line deem">Helps your customers.</span>
+<span class="line deem">Helps your customers</span>
 
 !SLIDE hero
 
-Priortize your testing strategy.<br>
-<span class="line deem">Helps your team.</span>
+Priortize your testing strategy<br>
+<span class="line deem">Helps your team</span>
 
 !SLIDE bigtext
 
@@ -592,43 +637,35 @@ Priortize your testing strategy.<br>
 
 Test what matters most.
 
-!SLIDE hero
+!SLIDE hero quote bigquote l
+
+<blockquote>
+...my philosophy is to <b>test as little as possible</b> to reach a given level of confidence</span>
+</blockquote>
+
+!SLIDE hero quote bigquote l
+
+<blockquote>
+If I don't typically make a kind of mistake (like setting the wrong variables in a constructor), I don't test for it.
+</blockquote>
+
+!SLIDE hero quote bigquote l
+
+<blockquote>
+When coding on a team, I modify my strategy to carefully test code that we, collectively, tend to get wrong.
+</blockquote>
+
+% FOO
+
+!SLIDE
+
+Visit **[yeti.cx](http://yeti.cx)** to get started
 
 <iframe src="http://yeti.cx" style="height: 1000px">Yeti</iframe>
 
-!SLIDE hero
-
-No software. Only browsers.
-
-!SLIDE hero
-
-<img src="nodejs.png">
-
-!SLIDE bigtext
-
- - Share browsers among your team
- - Share devices among your team
- - More browsers means faster results
- - Works with Jenkins
- - QUnit and YUI Test
- - Release every week
- - Help wanted
-
-!SLIDE hero
-
-CONTRIBUTING.md
-
-!SLIDE hero
-
-[yeti.cx](http://yeti.cx)
-
-!SLIDE hero
-
-Yeti helps us. <img src="yuilogo.png" style="width: 500px; height: 240px;">
-
 !SLIDE title bigtext
 
-Yeti is a tool that makes sure your code works.
+Yeti is a tool to help build working code.
 
 !SLIDE hero
 

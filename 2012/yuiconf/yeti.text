@@ -231,13 +231,38 @@ blockquote {
     font-size: 300%;
 }
 
-.full p {
+.full p,
+.full video {
     position: absolute;
     top: 0;
     left: 0;
     padding: 0;
     margin: 0;
+    width: 100%;
+    background: #000;
+    color: #fff;
 }
+
+.full video {
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.full .line {
+    position: absolute;
+    bottom: 10px;
+    right: 50px;
+    text-align: center;
+    font-size: 300%;
+    opacity: 1;
+    color: #000;
+    text-shadow: -1px 0 #fff, 0 1px #fff,
+      1px 0 #fff, 0 -1px #fff;
+    opacity: 0.7;
+    z-index: 10;
+}
+
 .deck-container h2 {
 /*    border-color: #1C2C56;
 */
@@ -275,6 +300,32 @@ No driver. Only browsers.
 
 <img src="nodejs.png">
 
+!SLIDE hero
+
+Yeti helps YUI <img src="yuilogo.png" style="width: 500px; height: 240px;">
+
+!SLIDE hero
+
+Why not Selenium?<br>
+<span class="deem line">
+<span class="slide">Real devices</span>
+<span class="slide">&amp; Actual browser</span>
+</span>
+
+% Drivers cannot test real Android, Nitro Safari
+
+!SLIDE hero
+
+<span class="slide">Presenting</span><br>
+The Dav Glass Device Laboratory<br>
+<span class="deem line">of Southern Illinois</span>
+
+!SLIDE full video
+
+<div class="line"><b>Yeti</b>TV</div>
+
+<video></video>
+
 !SLIDE bigtext
 
  - Share browsers among your team
@@ -284,10 +335,6 @@ No driver. Only browsers.
  - QUnit and YUI Test
  - Release every week
  - CONTRIBUTING.md
-
-!SLIDE hero
-
-Yeti helps us <img src="yuilogo.png" style="width: 500px; height: 240px;">
 
 !SLIDE hero
 
@@ -657,6 +704,16 @@ When coding on a team, I modify my strategy to carefully test code that we, coll
 
 % FOO
 
+!SLIDE hero
+
+Device Laboratory Reprise
+
+!SLIDE full video
+
+<div class="line"><b>Yeti</b>TV</div>
+
+<video></video>
+
 !SLIDE
 
 Visit **[yeti.cx](http://yeti.cx)** to get started
@@ -705,3 +762,85 @@ Thanks for attending.
 
 Presented by the [Upstage](https://github.com/reid/upstage/) presentation system.
 Built with [YUI](http://yuilibrary.com).
+
+<script>
+window.deckReady = function (deck, Y) {
+    var cameraStream,
+        cameraRequested = false;
+
+    function requestCamera(cb) {
+        if (cameraStream) {
+            if (cb) cb(cameraStream);
+            return;
+        }
+
+        var rtc,
+            url = "URL";
+
+        if (navigator.webkitGetUserMedia) {
+            rtc = "webkit";
+        } else if (navigator.mozGetUserMedia) {
+            rtc = "moz";
+        } else if (navigator.msGetUserMedia) {
+            rtc = "ms";
+        }
+
+        if (rtc) {
+            rtc += "GetUserMedia";
+        } else {
+            rtc = "getUserMedia";
+        }
+
+        if (window.webkitURL) {
+            url = "webkitURL";
+        }
+
+        console.log(rtc, navigator[rtc]);
+        console.log(url, window[url]);
+
+        navigator[rtc]({
+            video: true
+        }, function onUserMedia(stream) {
+            cameraStream = window[url].createObjectURL(stream);
+            if (cb) cb(cameraStream);
+        });
+    }
+
+    function videoTransitionIfNeeded(newIndex, oldIndex) {
+        var newSlide = deck.getSlideById(newIndex),
+            newVideo,
+            oldSlide,
+            oldVideo;
+
+        if (newSlide) {
+            newVideo = newSlide.one("video");
+            if (newVideo) {
+                requestCamera(function (streamURL) {
+                    newVideo = newVideo.getDOMNode();
+                    newVideo.autoplay = true;
+                    newVideo.src = streamURL;
+                });
+            }
+        }
+
+        if (oldIndex) {
+            oldSlide = deck.getSlideById(oldIndex),
+            oldVideo = oldSlide.one("video");
+            if (oldVideo) {
+                oldVideo = oldVideo.getDOMNode();
+                oldVideo.src = null;
+            }
+        }
+    }
+
+    deck.after("currentSlideChange", function (ev) {
+        videoTransitionIfNeeded(ev.newVal, ev.prevVal);
+    });
+
+    videoTransitionIfNeeded(deck.get("currentSlide"));
+
+    if (deck.get("currentSlide") === 1) {
+        requestCamera();
+    }
+};
+</script>

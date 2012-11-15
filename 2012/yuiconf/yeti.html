@@ -1,0 +1,1123 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Write Code That Works</title>
+
+    <meta name="author" content="by @reid">
+    <meta name="copyright" content="2012 Yahoo! Inc., licensed under the BSD License.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+
+    <link rel="stylesheet" href="build/upstage-deck-core-min.css">
+    <link rel="stylesheet" href="transition.css">
+    <link rel="stylesheet" href="prettify.css">
+
+    <style>
+      /* sudo hackday */
+
+@import url("http://fonts.googleapis.com/css?family=Lora|Raleway:500,800");
+
+.yui3-js-enabled body {
+    overflow: hidden;
+}
+
+a {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.deck-container {
+    font-family: Raleway, sans-serif;
+    letter-spacing: -0.1em;
+    font-style:normal;
+}
+
+/*
+.deck-container p {
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+*/
+
+.deck-container > .slide {
+    background: #fff;
+    color: #000;
+    /* reset padding */
+    padding: 0;
+    width: 100%;
+    font-size: 200%;
+}
+
+.deck-container > .title {
+    padding-top: 1em !important;
+    font-size: 4em;
+    background: #2F81C2;
+    background: #D84D1D;
+}
+
+.csstransforms .deck-container .title > * {
+    -webkit-transform: rotate(-3deg); 
+    -moz-transform: rotate(-3deg); 
+}
+
+.title h1 {
+    text-align: left;
+    margin: 0;
+}
+
+.title p {
+    margin: 0.25em 0;
+    font-size: 1.25em;
+    color: #fff;
+}
+
+.slide h1 {
+    background: #1C2C56;
+    background: #141423;
+    color: #fff;
+    padding: 20px;
+    margin: 0;
+    font-weight: 800;
+}
+
+.slide .line {
+    white-space: nowrap;
+}
+
+.contact h2 {
+    background: #1C2C56;
+    background: #141423;
+    color: #fff;
+    padding: 20px;
+    margin: 0 0 0.25em 0;
+    display: inline-block;
+    font-weight: 800;
+    font-size: 1em;
+}
+
+.deck-container .title h1 {
+    padding: 20px;
+    margin: 0;
+}
+
+/* add padding to children */
+
+.slide h2, .slide p, .slide pre {
+    padding: 0 20px;
+}
+
+/* new code style */
+
+#bd code, #bd pre {
+    background: #efefef;
+    text-shadow: none;
+}
+
+#bd pre {
+    margin-left: 25px;
+}
+
+.slide a {
+    color: #333;
+}
+
+/* end hackday */
+
+#ft {
+    position: absolute;
+    bottom: 0;
+    line-height: 28px;
+}
+
+/*
+.title {
+    background: url(title.png);
+    padding-top: 170px;
+    padding-left: 30px;
+    height: 580px;
+    width: 990px;
+    border: 1px solid #8c00a8;
+    border-width: 0 1px 1px 0;
+    font-size: 64px;
+}
+
+.title * {
+    width: 900px;
+    font-weight: 100;
+    border-bottom: 1px solid #fff;
+}
+*/
+
+.inline li {
+    float: left;
+    list-style: none;
+    padding: 10px;
+    margin: 7px;
+    background: #232323;
+    font-weight: bold;
+    font-size: 180%;
+}
+
+.inline li:last-child {
+    background: #343434;
+}
+
+.inline a {
+    text-align: center;
+}
+
+.bigtext p,
+.bigtext li {
+    font-size: 160% !important;
+}
+
+.hero {
+    height: 100%;
+    margin: 0 auto;
+    display: table;
+}
+
+.hero p,
+.hero blockquote {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 150% !important;
+}
+
+.l p,
+.l blockquote {
+    text-align: left;
+}
+
+.b {
+    font-weight: bold;
+}
+
+.deem {
+    font-size: 80%;
+    color: #bbb;
+}
+
+.deem a {
+    color: #999;
+}
+
+.contact ul {
+    font-size: 150%;
+    margin: 0.5em 0;
+    padding: 0.5em;
+    display: inline-block;
+    background: #87CBFF;
+    background: #FF6A45;
+}
+
+.contact li a {
+    color: #1C2C56;
+    text-decoration: none;
+}
+
+.contact li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+    
+iframe {
+    width: 100%;
+    height: 90%;
+    border: 0;
+}
+
+.quote p {
+    font-size: 110%;
+}
+
+.quote blockquote {
+    font-size: 200%;
+}
+
+blockquote {
+    font-family: Lora, Georgia, serif;
+}
+
+.bigquote p {
+    font-size: 120%;
+}
+
+.bigquote blockquote {
+    font-size: 300%;
+}
+
+.full p,
+.full video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background: #000;
+    color: #fff;
+}
+
+.full video {
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.full .line {
+    position: absolute;
+    bottom: 10px;
+    right: 50px;
+    text-align: center;
+    font-size: 300%;
+    opacity: 1;
+    color: #000;
+    text-shadow: -1px 0 #fff, 0 1px #fff,
+      1px 0 #fff, 0 -1px #fff;
+    opacity: 0.7;
+    z-index: 10;
+}
+
+.deck-container h2 {
+/*    border-color: #1C2C56;
+*/
+    border: 0;
+}
+
+    </style>
+</head>
+
+<body>
+
+<div id="bd" class="deck-container">
+
+    <div class="slide title">
+        <p class="conf"><strong>YUIConf</strong> 2012</p>
+        <h1>Write Code That Works</h1>
+        <p>by @reid</p>
+    </div>
+   
+<div class='slide hero'>
+<!-- === begin markdown block =====================================================
+
+      generated by markdown 1.0.0 on Ruby 1.8.7 (2012-02-08) [universal-darwin12.0]
+                on Thu Nov 15 10:02:37 -0800 2012 with Markdown engine kramdown (0.13.7)
+                  using options { !to be done! }
+  -->
+
+<!-- _S9SLIDE_  hero -->
+
+<p>This is a talk about <strong>software testing</strong></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>&ldquo;When not to write tests&rdquo;<br />
+<span class="deem line">(Alternate title)</span></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Time is limited</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Yeti<br />
+<span class="deem line">The YUI Easy Testing Interface</span></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Test JavaScript with any browser</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>No driver. Only browsers.</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p><img src="nodejs.png" /></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p><img src="yuilogo.png" /></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Why not Selenium?<br />
+<span class="deem line">
+<span class="slide">Real devices</span>
+<span class="slide">&amp; Actual browser</span>
+</span></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p><span class="slide">Presenting</span><br />
+The Dav Glass Device Laboratory<br />
+<span class="deem line">of Southern Illinois</span></p>
+
+</div>
+<div class='slide full video'>
+<!-- _S9SLIDE_  full video -->
+
+<div class="line"><b>Yeti</b>TV</div>
+
+<video />
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<ul>
+  <li>Share browsers among your team</li>
+  <li>Share devices among your team</li>
+  <li>More browsers means faster results</li>
+  <li>Works with Jenkins</li>
+  <li>QUnit and YUI Test</li>
+  <li>Release every week</li>
+  <li>CONTRIBUTING.md</li>
+</ul>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>What are you building?
+<span class="slide b line">Something.</span></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>How do you build it?
+<span class="slide b line">With code.</span></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>What does that code do?
+<span class="slide b line">Work.</span></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>How does it work?
+<span class="slide b line">Not by writing tests.</span></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p><span class="line">Testing only helps.</span><br />
+<span class="deem line">
+Tested code ≠ Working code
+</span></p>
+
+</div>
+<div class='slide quote bigquote'>
+<!-- _S9SLIDE_  quote bigquote -->
+
+<blockquote>
+Testing shows the presence, not the absence of bugs
+</blockquote>
+
+<p>&mdash; <strong>Edsger W. Dijkstra</strong>, <a href="http://homepages.cs.ncl.ac.uk/brian.randell/NATO/nato1969.PDF">J.N. Buxton and B. Randell, eds, Software Engineering Techniques, April 1970, p. 16.</a></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Testing is a tool, not the goal</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Antipatterns</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Writing tests first ≠
+<span class="line">Working code</span></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Lots of tests ≠
+<span class="line">Working code</span></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>100% line coverage ≠
+<span class="line">Working code</span>
+<br /><span class="slide deem line">(but it helps)</span></p>
+
+</div>
+<div class='slide title bigtext'>
+<!-- _S9SLIDE_  title bigtext -->
+
+<p>You are not paid to write tests.</p>
+
+</div>
+<div class='slide hero bigtext'>
+<!-- _S9SLIDE_  hero bigtext -->
+
+<p>Listen to a smart guy.</p>
+
+</div>
+<div class='slide hero quote bigquote l'>
+<!-- _S9SLIDE_  hero quote bigquote l -->
+
+<blockquote>
+I get paid for code that works, not for tests<span class="slide">, so 
+my philosophy is to test as little as possible to reach a given level of confidence</span>
+</blockquote>
+
+</div>
+<div class='slide hero quote bigquote l'>
+<!-- _S9SLIDE_  hero quote bigquote l -->
+
+<blockquote>
+If I don't typically make a kind of mistake (like setting the wrong variables in a constructor), <span class="slide">I don't test for it.</span>
+</blockquote>
+
+</div>
+<div class='slide hero quote bigquote l'>
+<!-- _S9SLIDE_  hero quote bigquote l -->
+
+<blockquote>
+When coding on a team, I modify my strategy to carefully test code that we, collectively, tend to get wrong.
+</blockquote>
+
+</div>
+<div class='slide hero l'>
+<!-- _S9SLIDE_  hero l -->
+
+<p>Kent Beck wrote that. <span class="slide">Known for advancing <strong>Test Driven Development</strong>.
+</span></p>
+
+</div>
+<div class='slide title'>
+<!-- _S9SLIDE_  title -->
+
+<p><a href="http://stackoverflow.com/a/153565">
+<img src="beck.png" />
+</a></p>
+
+</div>
+<div class='slide hero l'>
+<!-- _S9SLIDE_  hero l -->
+
+<p>He also was one of the 17 original signatories of the <strong>Agile Manifesto</strong>.</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>What&rsquo;s agile again?</p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+<p><a href="http://agilemanifesto.org/">The Agile Manifesto</a> (2001)</p>
+
+<blockquote>
+<p class="slide">
+We are uncovering better ways of developing software by doing it and helping others do it.
+</p>
+
+<p class="slide">
+Through this work we have come to value:
+<ul>
+<li class="slide">
+Individuals and interactions over processes and tools
+</li>
+<li class="slide">
+Working software over comprehensive documentation
+</li>
+<li class="slide">
+Customer collaboration over contract negotiation
+</li>
+<li class="slide">
+Responding to change over following a plan
+</li>
+</ul>
+</p>
+
+<p class="slide">
+That is, while there is value in the items on the right, we value the items on the left more.
+</p>
+</blockquote>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Working software &gt; comprehensive docs</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Working software &gt; talking about it</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Working software &gt; metrics about it</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Working software &gt; green blinkenlights</p>
+
+</div>
+<div class='slide hero bigtext'>
+<!-- _S9SLIDE_  hero bigtext -->
+
+<p>Over-testing</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p><img src="dhs.png" style="height: 600px; width: 600px;" /></p>
+
+</div>
+<div class='slide full'>
+<!-- _S9SLIDE_  full -->
+
+<p><a href="http://www.flickr.com/photos/sixmilliondollardan/3382932556/" title="security screening at denver airport by Inha Leex Hale, on Flickr"><img src="http://farm4.staticflickr.com/3460/3382932556_cab88a86f3_b.jpg" width="1024" height="768" alt="security screening at denver airport" /></a></p>
+
+</div>
+<div class='slide full'>
+<!-- _S9SLIDE_  full -->
+
+<p><a href="http://37signals.com/svn/posts/3159-testing-like-the-tsa">
+<img src="Testing like the TSA.png" />
+</a></p>
+
+</div>
+<div class='slide hero l'>
+<!-- _S9SLIDE_  hero l -->
+
+<p>Writing tests has a cost.<br /><span class="slide">
+Time to write</span><span class="slide">, to update</span><span class="slide">, to read and understand</span><span class="slide">, and to actually run!</span></p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Quality theater.</p>
+
+<p><span class="slide">
+Total test count.
+</span>
+<span class="slide">
+Line coverage.
+</span>
+<span class="slide">
+Branch coverage.
+</span>
+<span class="slide">
+Statement coverage.
+</span>
+<span class="slide">
+Speed of test runs.
+</span></p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>We forgot about some other metrics.</p>
+
+<p><span class="slide">
+Amount of test code.
+</span>
+<span class="slide">
+Amount of time writing tests.
+</span>
+<span class="slide">
+High coverage by useless tests.
+<!-- functional instead of unit -->
+</span></p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<p>Be sensible.</p>
+
+<ul>
+  <li>Code-to-test ratio</li>
+  <li>Test the smallest thing first</li>
+  <li>Integration testing is for integration</li>
+  <li>Too much time writing tests</li>
+</ul>
+
+</div>
+<div class='slide title bigtext'>
+<!-- _S9SLIDE_  title bigtext -->
+
+<p>Consider the unseen metrics.</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>We forgot about our own productivity.</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>More wisdom from Kent Beck</p>
+
+</div>
+<div class='slide hero quote bigquote l'>
+<!-- _S9SLIDE_  hero quote bigquote l -->
+
+<blockquote>
+Different people will have different testing strategies based on this philosophy,
+</blockquote>
+
+</div>
+<div class='slide hero quote bigquote l'>
+<!-- _S9SLIDE_  hero quote bigquote l -->
+
+<blockquote>
+but that seems reasonable to me given the immature state of understanding of how tests can best fit into the inner loop of coding.
+</blockquote>
+
+</div>
+<div class='slide hero quote bigquote l'>
+<!-- _S9SLIDE_  hero quote bigquote l -->
+
+<blockquote>
+Ten or twenty years from now we'll likely have a more universal theory of which tests to write, which tests not to write, and how to tell the difference.
+</blockquote>
+
+</div>
+<div class='slide hero quote bigquote l'>
+<!-- _S9SLIDE_  hero quote bigquote l -->
+
+<blockquote>
+In the meantime, experimentation seems in order.
+</blockquote>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Test Driven Development<span class="slide line"> &amp; Agile</span><span class="slide line"> &amp; your creative process</span> <span class="line">is for experimenting.</span></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>We experiment to make great code.</p>
+
+</div>
+<div class='slide title bigtext'>
+<!-- _S9SLIDE_  title bigtext -->
+
+<p>If you can&rsquo;t test everything, what should you test?</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Prioritize your testing strategy.</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>What code is changing?</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Semantic Versioning<br />
+<span class="deem line">Project-level stability contract</span></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p><strong>X.Y.Z</strong></p>
+
+</div>
+<div class='slide bigtext b l'>
+<!-- _S9SLIDE_  bigtext b l -->
+
+<ul>
+  <li>0.1.0</li>
+  <li>0.2.0</li>
+  <li>0.2.1</li>
+  <li>1.0.0</li>
+  <li>1.0.1</li>
+  <li>1.1.0</li>
+  <li>2.0.0</li>
+</ul>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>?<br />
+<span class="deem line">Section-level stability contract</span></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p><img src="nodejs.png" /></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Stability Index<br />
+<span class="deem line">Section-level stability contract</span></p>
+
+</div>
+<div class='slide quote'>
+<!-- _S9SLIDE_  quote -->
+
+<blockquote>
+Throughout the documentation, you will see indications of a section’s stability. The Node.js API is still somewhat changing, and as it matures, certain parts are more reliable than others.
+</blockquote>
+
+</div>
+<div class='slide quote'>
+<!-- _S9SLIDE_  quote -->
+
+<blockquote>
+Some are so proven, and so relied upon, that they are unlikely to ever change at all. Others are brand new and experimental, or known to be hazardous and in the process of being redesigned.
+</blockquote>
+
+<p>&mdash; The Node.js <a href="http://nodejs.org/docs/v0.8.10/api/documentation.html#documentation_stability_
+index">Stability Index</a> documentation.</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>&ldquo;How reliable is this?&rdquo;<br />
+<span class="line deem">Helps your customers</span></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Priortize your testing strategy<br />
+<span class="line deem">Helps your team</span></p>
+
+</div>
+<div class='slide bigtext'>
+<!-- _S9SLIDE_  bigtext -->
+
+<ul>
+  <li>Deprecated</li>
+  <li>Experimental</li>
+  <li>Unstable</li>
+  <li>Stable</li>
+  <li>API Frozen</li>
+  <li>Locked</li>
+</ul>
+
+</div>
+<div class='slide title bigtext'>
+<!-- _S9SLIDE_  title bigtext -->
+
+<p>Test what matters most.</p>
+
+</div>
+<div class='slide hero quote bigquote l'>
+<!-- _S9SLIDE_  hero quote bigquote l -->
+
+<blockquote>
+...my philosophy is to <b>test as little as possible</b> to reach a given level of confidence
+</blockquote>
+
+</div>
+<div class='slide hero quote bigquote l'>
+<!-- _S9SLIDE_  hero quote bigquote l -->
+
+<blockquote>
+If I don't typically make a kind of mistake (like setting the wrong variables in a constructor), I don't test for it.
+</blockquote>
+
+</div>
+<div class='slide hero quote bigquote l'>
+<!-- _S9SLIDE_  hero quote bigquote l -->
+
+<blockquote>
+When coding on a team, I modify my strategy to carefully test code that we, collectively, tend to get wrong.
+</blockquote>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Device Laboratory Reprise</p>
+
+</div>
+<div class='slide full video'>
+<!-- _S9SLIDE_  full video -->
+
+<div class="line"><b>Yeti</b>TV</div>
+
+<video />
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_  -->
+
+<p>Visit <strong><a href="http://yeti.cx">yeti.cx</a></strong> to get started</p>
+
+<iframe src="http://yeti.cx" style="height: 1000px">Yeti</iframe>
+
+</div>
+<div class='slide title bigtext'>
+<!-- _S9SLIDE_  title bigtext -->
+
+<p>Yeti is a tool to help build working code.</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Your code is ultimately up to you.</p>
+
+</div>
+<div class='slide hero quote bigquote l'>
+<!-- _S9SLIDE_  hero quote bigquote l -->
+
+<blockquote>
+In the meantime, experimentation seems in order.
+</blockquote>
+
+</div>
+<div class='slide title bigtext'>
+<!-- _S9SLIDE_  title bigtext -->
+
+<p>More on my blog.</p>
+
+<p><img src="Write Code That Works by Reid Burke.png" /></p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Go experiment.</p>
+
+</div>
+<div class='slide hero'>
+<!-- _S9SLIDE_  hero -->
+
+<p>Follow <a href="http://twitter.com/reid">@reid</a><br />
+<span class="deem">An <a href="https://github.com/reid/upstage">Upstage</a> presentation</span><br />
+<span class="deem">Built with <a href="http://yuilibrary.com">YUI</a></span></p>
+
+<script>
+window.deckReady = function (deck, Y) {
+    var cameraStream,
+        cameraRequested = false;
+
+    function requestCamera(cb) {
+        if (cameraStream) {
+            if (cb) cb(cameraStream);
+            return;
+        }
+
+        var rtc,
+            url = "URL";
+
+        if (navigator.webkitGetUserMedia) {
+            rtc = "webkit";
+        } else if (navigator.mozGetUserMedia) {
+            rtc = "moz";
+        } else if (navigator.msGetUserMedia) {
+            rtc = "ms";
+        }
+
+        if (rtc) {
+            rtc += "GetUserMedia";
+        } else {
+            rtc = "getUserMedia";
+        }
+
+        if (window.webkitURL) {
+            url = "webkitURL";
+        }
+
+        console.log(rtc, navigator[rtc]);
+        console.log(url, window[url]);
+
+        navigator[rtc]({
+            video: true
+        }, function onUserMedia(stream) {
+            cameraStream = window[url].createObjectURL(stream);
+            if (cb) cb(cameraStream);
+        });
+    }
+
+    function videoTransitionIfNeeded(newIndex, oldIndex) {
+        var newSlide = deck.getSlideById(newIndex),
+            newVideo,
+            oldSlide,
+            oldVideo;
+
+        if (newSlide) {
+            newVideo = newSlide.one("video");
+            if (newVideo) {
+                requestCamera(function (streamURL) {
+                    newVideo = newVideo.getDOMNode();
+                    newVideo.autoplay = true;
+                    newVideo.src = streamURL;
+                });
+            }
+        }
+
+        if (oldIndex) {
+            oldSlide = deck.getSlideById(oldIndex),
+            oldVideo = oldSlide.one("video");
+            if (oldVideo) {
+                oldVideo = oldVideo.getDOMNode();
+                oldVideo.src = null;
+            }
+        }
+    }
+
+    deck.after("currentSlideChange", function (ev) {
+        videoTransitionIfNeeded(ev.newVal, ev.prevVal);
+    });
+
+    videoTransitionIfNeeded(deck.get("currentSlide"));
+
+    if (deck.get("currentSlide") === 1) {
+        requestCamera();
+    }
+};
+</script>
+
+<!-- === end markdown block ===================================================== -->
+</div>
+
+
+</div>
+
+<script src="prettify.js"></script>
+<script src="http://yui.yahooapis.com/3.8.0pr1/build/yui/yui-min.js"></script>
+<script>
+    if (!window.YUI) {
+        // Retry with a local URL.
+        document.write('<script src="yui3/build/yui/yui.js"><\/script>');
+        // Don't autodetect the base path (the CDN path didn't work).
+        document.write('<script>YUI.config.base = "yui3/build/";<\/script>');
+    }
+</script>
+<script>
+    prettyPrint();
+    YUI({
+        modules: {
+            "upstage-blank": {
+                fullpath: "build/upstage-blank-min.js",
+                requires: ["upstage-slideshow", "plugin"]
+            },
+            "upstage-controls": {
+                fullpath: "build/upstage-controls-min.js",
+                requires: ["upstage-slideshow", "widget", "transition", "node"]
+            },
+            "upstage-gesture": {
+                fullpath: "build/upstage-gesture-min.js",
+                requires: ["upstage-slideshow", "plugin", "event-move"]
+            },
+            "upstage-keyboard": {
+                fullpath: "build/upstage-keyboard-min.js",
+                requires: ["upstage-slideshow", "base-build", "plugin", "event-key"]
+            },
+            "upstage-permalink": {
+                fullpath: "build/upstage-permalink-min.js",
+                requires: ["upstage-slideshow", "base-build", "node", "plugin", "history"]
+            },
+            "upstage-slideshow": {
+                fullpath: "build/upstage-slideshow-min.js",
+                requires: ["oop", "node", "widget", "base-build"]
+            }
+            // For controls plugin-widget:
+            // It should be a sub-Widget, but pluggable into deck.
+            // Also, it should create the prev/next links
+            // unlike deck.js which puts dummy links in markup.
+        },
+        debug: true,
+        filter: "min"
+    }).use(
+        "upstage-slideshow",
+        "upstage-keyboard",
+        "upstage-permalink",
+        "upstage-gesture",
+        "upstage-blank",
+        function (Y) {
+            // Upstage is a YUI widget.
+            var deck = new Y.Upstage({
+                srcNode: "#bd" // Where to find .slide elements.
+            });
+
+            // Upstage does not do much without plugins.
+            // They are all optional. Use only what you need.
+            deck.plug([
+                Y.Plugin.UpstageKeyboard,
+                Y.Plugin.UpstageBlank,
+                Y.Plugin.UpstageGesture,
+                Y.Plugin.UpstagePermalink
+            ]);
+
+            deck.render();
+
+            if ("function" === typeof window.deckReady) {
+                window.deckReady(deck, Y);
+            }
+        }
+    );
+</script>
+
+</body>
+
+</html>

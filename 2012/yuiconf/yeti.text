@@ -12,6 +12,11 @@ Footer: <strong>YUIConf</strong> 2012
     overflow: hidden;
 }
 
+a {
+    font-weight: bold;
+    text-decoration: none;
+}
+
 .deck-container {
     font-family: Raleway, sans-serif;
     letter-spacing: -0.1em;
@@ -185,6 +190,10 @@ Footer: <strong>YUIConf</strong> 2012
     color: #bbb;
 }
 
+.deem a {
+    color: #999;
+}
+
 .contact ul {
     font-size: 150%;
     margin: 0.5em 0;
@@ -302,7 +311,7 @@ No driver. Only browsers.
 
 !SLIDE hero
 
-Yeti helps YUI <img src="yuilogo.png" style="width: 500px; height: 240px;">
+<img src="yuilogo.png">
 
 !SLIDE hero
 
@@ -377,7 +386,7 @@ Testing is a tool, not the goal
 
 !SLIDE hero
 
-Antipattern
+Antipatterns
 
 !SLIDE hero
 
@@ -389,13 +398,15 @@ Writing tests first ≠
 Lots of tests ≠
 <span class="line">Working code</span>
 
+% Like lots of function calls
+
 !SLIDE hero
 
 100% line coverage ≠
 <span class="line">Working code</span>
 <br><span class="slide deem line">(but it helps)</span>
 
-!SLIDE hero bigtext b
+!SLIDE title bigtext
 
 You are not paid to write tests.
 
@@ -443,7 +454,7 @@ What's agile again?
 
 !SLIDE
 
-The Agile Manifesto.
+[The Agile Manifesto](http://agilemanifesto.org/) (2001)
 
 <blockquote>
 <p class="slide">
@@ -509,7 +520,7 @@ Over-testing
 
 !SLIDE hero l
 
-<strong>Writing tests has a cost.</strong> <br><span class="slide">
+Writing tests has a cost.<br><span class="slide">
 Time to write</span><span class="slide">, to update</span><span class="slide">, to read and understand</span><span class="slide">, and to actually run!</span>
 
 !SLIDE bigtext
@@ -744,24 +755,11 @@ More on my blog.
 
 Go experiment.
 
-!SLIDE title contact
+!SLIDE hero
 
-<h2>Write Code That Works</h2>
-<ul>
-<li>
-<strong>Reid Burke</strong>
-</li>
-<li>
-<span><a href="http://twitter.com/reid">@reid</a> on Twitter</span>
-</li>
-</ul>
-
-Thanks for attending.
-
-# Colophon
-
-Presented by the [Upstage](https://github.com/reid/upstage/) presentation system.
-Built with [YUI](http://yuilibrary.com).
+Follow <a href="http://twitter.com/reid">@reid</a><br>
+<span class="deem">An <a href="https://github.com/reid/upstage">Upstage</a> presentation</span><br>
+<span class="deem">Built with <a href="http://yuilibrary.com">YUI</a></span>
 
 <script>
 window.deckReady = function (deck, Y) {

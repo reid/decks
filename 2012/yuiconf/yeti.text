@@ -796,12 +796,16 @@ window.deckReady = function (deck, Y) {
         console.log(rtc, navigator[rtc]);
         console.log(url, window[url]);
 
-        navigator[rtc]({
-            video: true
-        }, function onUserMedia(stream) {
-            cameraStream = window[url].createObjectURL(stream);
-            if (cb) cb(cameraStream);
-        });
+        if (rtc in navigator) {
+            navigator[rtc]({
+                video: true
+            }, function onUserMedia(stream) {
+                cameraStream = window[url].createObjectURL(stream);
+                if (cb) cb(cameraStream);
+            });
+        } else if (cb) {
+            cb(false);
+        }
     }
 
     function videoTransitionIfNeeded(newIndex, oldIndex) {
@@ -814,6 +818,13 @@ window.deckReady = function (deck, Y) {
             newVideo = newSlide.one("video");
             if (newVideo) {
                 requestCamera(function (streamURL) {
+                    if (streamURL === false) {
+                        // getUserMedia not supported.
+                        newVideo.remove(true);
+                        newSlide.append("<p>" +
+                            "Webcam is not supported in your browser.</p>");
+                        return;
+                    }
                     newVideo = newVideo.getDOMNode();
                     newVideo.autoplay = true;
                     newVideo.src = streamURL;
